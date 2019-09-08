@@ -4,7 +4,7 @@
                 :output-dir       "resources/public/js"
                 :asset-path       "/assets/js"
 
-                :compiler-options {:infer-externs :all}
+                :compiler-options {:infer-externs :auto}
 
                 :modules          {:main {:entries [useless.client.app]}}
 
