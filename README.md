@@ -5,20 +5,23 @@ Make the Clojure code blocks in Markdown documents interactive.
 
 ## Quick start
 
-```bash
-$ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "2ade25ddc180dbcbd6484e86f8b562b7fd7a51c5"}}}' -m useless.cli
-Listening on http://[::1]:1234
-```
 
-Open [http://[::1]:1234/readme/github/eerohele/useless](http://[::1]:1234/readme/github/eerohele/useless) in your favorite browser.
+1. Run:
 
-```clojure
-;; Press Cmd-Enter (macOS) or Ctrl-Enter to evaluate things.
+    ```bash
+    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "2ade25ddc180dbcbd6484e86f8b562b7fd7a51c5"}}}' -m useless.cli
+    Listening on http://[::1]:1234
+    ```
 
-(require '[clojure.string :as string])
+1. Open [http://[::1]:1234/d/readme/github/eerohele/useless](http://[::1]:1234/d/readme/github/eerohele/useless) in your favorite browser and start evaluating things.
 
-(string/upper-case "Hello, world!")
-```
+    ```clojure
+    ;; Press Cmd-Enter (macOS) or Ctrl-Enter to evaluate things.
+
+    (require '[clojure.string :as string])
+
+    (string/upper-case "Hello, world!")
+    ```
 
 ## Evaluating forms
 
