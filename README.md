@@ -6,7 +6,8 @@ Make the Clojure code blocks in Markdown documents interactive.
 ## Quick start
 
 ```bash
-$ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "43f8d6ae4685441d37b3dae52162b83a1b85574e"}}}' -m useless.cli
+$ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "2ade25ddc180dbcbd6484e86f8b562b7fd7a51c5"}}}' -m useless.cli
+Listening on http://[::1]:1234
 ```
 
 Open [http://[::1]:1234/readme/github/eerohele/useless](http://[::1]:1234/readme/github/eerohele/useless) in your favorite browser.
