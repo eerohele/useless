@@ -20,7 +20,7 @@
 
 
 (defn code-string
-  [editor]
+  [^js editor]
   (let [selection (.getSelection editor)
         matching-brackets (.findMatchingBracket editor (.getCursor editor))]
     (cond
