@@ -65,6 +65,9 @@ $ open http://[::1]:1234/d/readme/github/reborg/parallel
 Liberal use of aliases can make things rather more succinct when it comes to
 using Useless.
 
+You can also change the port number of the nREPL server to connect to by
+clicking on the port number in the upper left-hand corner.
+
 ## Sources
 
 Useless can work on Markdown documents in one of these sources:
