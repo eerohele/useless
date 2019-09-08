@@ -6,7 +6,7 @@ Make the Clojure code blocks in Markdown documents interactive.
 ## Quick start
 
 ```bash
-$ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "ffa3f7feaf1ffccf1fd06a54e303f23f53705732"}}}' -m useless.cli
+$ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "ffa3f7feaf1ffccf1fd06a54e303f23f53705732"}}}' -m useless.cliREA
 ```
 
 Open [http://[::1]:1234/readme/github/eerohele/useless](http://[::1]:1234/readme/github/eerohele/useless) in your favorite browser.
@@ -80,6 +80,14 @@ Nope. If you expose Useless to the public internet, you're going to have bad
 time. I haven't made any sort of attempt to make Useless secure in any
 particular way, except to prevent it from listening on all IP addresses
 (0.0.0.0).
+
+## Why?
+
+I don't know. You tell me. Tutorials? Interactive documentation? Onboarding a
+new developer by acquainting them with a library or microservice via an
+interactive Markdown document? Shitty literate programming?
+
+Please let me know whether this library is worth its name.
 
 ## TODO
 
