@@ -1,0 +1,16 @@
+{:deps   {:aliases [:dev]}
+
+ :builds {:app {:target           :browser
+                :output-dir       "resources/public/js"
+                :asset-path       "/assets/js"
+
+                :compiler-options {:infer-externs :all}
+
+                :modules          {:main {:entries [useless.client.app]}}
+
+                :devtools         {:before-load useless.client.app/stop
+                                   :after-load  useless.client.app/start
+                                   :watch-dir   "resources/public"
+                                   :loader-mode :eval}}}
+
+ :nrepl  false}

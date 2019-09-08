@@ -1,0 +1,149 @@
+:root {
+    --font-family-monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    --color-background: hsla(231, 15%, 18%, 1);
+    --color-link: hsla(265, 89%, 78%, 1);
+    --color-link-hover: hsla(265, 89%, 78%, 0.7);
+    --color-evaluation-result-namespace: hsla(231, 23%, 61%, 1);
+    --color-codeblock-border: hsla(231, 14%, 27%, 1);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: var(--color-background);
+    color: #f8f8f2;
+    font-family: var(--font-family-sans-serif);
+    font-size: 100%;
+    margin: 0 1rem;
+}
+
+main {
+    margin-top: 3em;
+    max-width: 42em;
+}
+
+h1, h2 {
+    font-family: var(--font-family-sans-serif);
+    font-weight: normal;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+p code {
+    color: #ff79c6;
+}
+
+a:link,
+a:visited {
+    color: var(--color-link);
+    transition: color 150ms ease-in-out;
+}
+
+a:hover,
+a:focus {
+    color: var(--color-link-hover);
+}
+
+/* Connection status */
+
+header {
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+header .connection-status {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+}
+
+header .connection-status * {
+    font-size: .75rem;
+}
+
+header .connection-status p {
+    margin: 0;
+    padding: 0;
+}
+
+header .connection-status .port {
+    display: flex;
+    align-items: baseline;
+}
+
+header .connection-status .port .label {
+    opacity: .75;
+    margin-right: .25rem;
+}
+
+header .connection-status .port input {
+    border: 0;
+    color: white;
+    font-size: .75rem;
+    padding: 0;
+    background: transparent;
+    outline: none;
+    width: 52px;
+}
+
+header .connection-status.connected {
+    background: hsl(134, 51%, 33%);
+}
+
+header .connection-status.disconnected {
+    background: hsl(1, 72%, 45%);
+}
+
+/* Codeblocks */
+
+.codeblock {
+    border-left: 5px solid var(--color-codeblock-border);
+    padding-left: 5px;
+    margin-left: -15px;
+}
+
+.codeblock .evaluation-result {
+    padding-left: .5rem;
+}
+
+.codeblock .evaluation-result code {
+    font: 0.9rem/1.2 var(--font-family-monospace);
+}
+
+.codeblock .evaluation-result .ns:not(:empty) {
+    color: var(--color-evaluation-result-namespace);
+    padding: .25em .5rem .25em 0;
+}
+
+.codeblock .evaluation-result .value {
+    color: hsl(135, 94%, 65%);
+}
+
+.codeblock .evaluation-result .err {
+    color: hsl(0, 100%, 67%);
+}
+
+/* CodeMirror */
+
+.CodeMirror {
+    font: 0.9rem/1.5 var(--font-family-monospace);
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.cm-s-dracula .CodeMirror-matchingbracket {
+    color: #0f0 !important;
+    text-decoration: none;
+}
