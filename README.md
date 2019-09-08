@@ -102,4 +102,5 @@ Please let me know whether this library is worth its name.
 - Look for easier ways to use dependencies
 - Add caching for GitHub content
 - Encode nREPL messages as Transit over the wire?
+- Improve styles
 - This README is quite bad
