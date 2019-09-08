@@ -53,14 +53,14 @@ first start an nREPL server that includes it as a dependency:
 
 ```bash
 ;; You can make this invocation a lot shorter if you add an alias for nREPL
-;; in your `~/.clojure/deps.edn`.
+;; in your `~/.clojure/deps.edn`: https://nrepl.org/nrepl/0.6.0/usage/server.html
 $ clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "0.10"}}}' -m nrepl.cmdline --port 31337
 ```
 
 Then, you can start Useless and tell it to use the nREPL server you started:
 
 ```bash
-$ clj -m useless --nrepl-port 31337
+$ clj -m useless.cli --nrepl-port 31337
 Listening on http://[::1]:1234
 
 $ open http://[::1]:1234/d/readme/github/reborg/parallel
