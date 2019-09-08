@@ -22,6 +22,15 @@ Make the Clojure code blocks in Markdown documents interactive.
 
     (string/upper-case "Hello, world!")
     ```
+   
+## Sources
+
+Useless can work on Markdown documents in one of these sources:
+
+- File: [http://localhost:1234/d/file/README.md](http://localhost:1234/d/file/README.md)
+- Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown)
+- Gist: [http://localhost:1234/d/gist/e1dca953548bfdfb9844](http://localhost:1234/d/gist/e1dca953548bfdfb9844)
+- GitHub README: [http://localhost:1234/d/readme/github/ztellman/manifold](http://localhost:1234/d/readme/github/ztellman/manifold)
 
 ## Evaluating forms
 
@@ -71,15 +80,6 @@ using Useless.
 
 You can also change the port number of the nREPL server to connect to by
 clicking on the port number in the upper left-hand corner.
-
-## Sources
-
-Useless can work on Markdown documents in one of these sources:
-
-- File: [http://localhost:1234/d/file/README.md](http://localhost:1234/d/file/README.md)
-- Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown)
-- Gist: [http://localhost:1234/d/gist/e1dca953548bfdfb9844](http://localhost:1234/d/gist/e1dca953548bfdfb9844)
-- GitHub README: [http://localhost:1234/d/readme/github/ztellman/manifold](http://localhost:1234/d/readme/github/ztellman/manifold)
 
 ## Security
 
