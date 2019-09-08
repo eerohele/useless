@@ -13,7 +13,7 @@ Make the Clojure code blocks in Markdown documents interactive.
     Listening on http://[::1]:1234
     ```
 
-1. Open [http://[::1]:1234/d/readme/github/eerohele/useless](http://[::1]:1234/d/readme/github/eerohele/useless) in your favorite browser and start evaluating things.
+1. Open [http://localhost:1234/d/readme/github/eerohele/useless](http://localhost:1234/d/readme/github/eerohele/useless) in your favorite browser and start evaluating things.
 
     ```clojure
     ;; Press Cmd-Enter (macOS) or Ctrl-Enter to evaluate things.
@@ -76,10 +76,10 @@ clicking on the port number in the upper left-hand corner.
 
 Useless can work on Markdown documents in one of these sources:
 
-- File: [http://[::1]:1234/d/file/README.md](http://[::1]:1234/d/file/README.md)
-- Classpath resource: [http://[::1]:1234/d/classpath/vendor/example.markdown](http://[::1]:1234/d/classpath/vendor/example.markdown)
-- Gist: [http://[::1]:1234/d/gist/e1dca953548bfdfb9844](http://[::1]:1234/d/gist/e1dca953548bfdfb9844)
-- GitHub README: [http://[::1]:1234/d/readme/github/ztellman/manifold](http://[::1]:1234/d/readme/github/ztellman/manifold)
+- File: [http://localhost:1234/d/file/README.md](http://localhost:1234/d/file/README.md)
+- Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown)
+- Gist: [http://localhost:1234/d/gist/e1dca953548bfdfb9844](http://localhost:1234/d/gist/e1dca953548bfdfb9844)
+- GitHub README: [http://localhost:1234/d/readme/github/ztellman/manifold](http://localhost:1234/d/readme/github/ztellman/manifold)
 
 ## Security
 
