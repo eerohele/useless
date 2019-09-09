@@ -22,6 +22,16 @@ Make the Clojure code blocks in Markdown documents interactive.
 
     (string/upper-case "Hello, world!")
     ```
+
+## Alias
+
+To make launching Useless easier, you can add an alias like this in your `~/.clojure/deps.edn`:
+
+```clojure
+:aliases {:useless {:extra-deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless"
+                                                       :sha "<INSERT SHA HERE>"}}
+                    :main-opts  ["-m" "useless.cli"]}}
+```
    
 ## Sources
 
@@ -61,15 +71,16 @@ Borgatti's [`parallel`](https://github.com/reborg/parallel) library, you can
 first start an nREPL server that includes it as a dependency:
 
 ```bash
-;; You can make this invocation a lot shorter if you add an alias for nREPL
-;; in your `~/.clojure/deps.edn`: https://nrepl.org/nrepl/0.6.0/usage/server.html
+# You can make this invocation a bit shorter if you add an alias for nREPL
+# in your `~/.clojure/deps.edn`: https://nrepl.org/nrepl/0.6.0/usage/server.html
 $ clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "0.10"}}}' -m nrepl.cmdline --port 31337
 ```
 
 Then, you can start Useless and tell it to use the nREPL server you started:
 
 ```bash
-$ clj -m useless.cli --nrepl-port 31337
+# If you have the appropriate alias in your `~/.clojure/deps.edn`:
+$ clj -A:useless --nrepl-port 31337
 Listening on http://[::1]:1234
 
 $ open http://[::1]:1234/d/readme/github/reborg/parallel
