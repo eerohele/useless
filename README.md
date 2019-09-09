@@ -9,7 +9,7 @@ Make the Clojure code blocks in Markdown documents interactive.
 1. Run:
 
     ```bash
-    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "2ade25ddc180dbcbd6484e86f8b562b7fd7a51c5"}}}' -m useless.cli
+    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "ff009f40aeeedb4dcc282440cca26171fc1e967c"}}}' -m useless.cli
     Listening on http://[::1]:1234
     ```
 
@@ -28,7 +28,7 @@ Make the Clojure code blocks in Markdown documents interactive.
 Useless can work on Markdown documents in one of these sources:
 
 - File: [http://localhost:1234/d/file/README.md](http://localhost:1234/d/file/README.md)
-- Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown) (if this doesn't work on the first go, try refreshing, dunno what's going on)
+- Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown)
 - Gist: [http://localhost:1234/d/gist/e1dca953548bfdfb9844](http://localhost:1234/d/gist/e1dca953548bfdfb9844)
 - GitHub README: [http://localhost:1234/d/readme/github/ztellman/manifold](http://localhost:1234/d/readme/github/ztellman/manifold)
 
