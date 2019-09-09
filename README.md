@@ -121,4 +121,5 @@ Please let me know whether this library is worth its name.
 - Add caching for GitHub content
 - Encode nREPL messages as Transit over the wire?
 - Improve styles
+- Support images
 - This README is quite bad
