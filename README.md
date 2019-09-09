@@ -5,6 +5,7 @@ Make the Clojure code blocks in Markdown documents interactive.
 
 ## Quick start
 
+You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_started#_clojure_installer_and_cli_tools) installed.
 
 1. Run:
 
