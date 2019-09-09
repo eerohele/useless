@@ -34,7 +34,7 @@ To make launching Useless easier, you can add an alias like this in your `~/.clo
                     :main-opts  ["-m" "useless.cli"]}}
 ```
 
-Then, you can Run Useless like this:
+Then, you can run Useless like this:
 
 ```bash
 $ clj -A:useless
