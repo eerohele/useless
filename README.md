@@ -32,6 +32,12 @@ To make launching Useless easier, you can add an alias like this in your `~/.clo
                                                        :sha "<INSERT SHA HERE>"}}
                     :main-opts  ["-m" "useless.cli"]}}
 ```
+
+Then, you can Run Useless like this:
+
+```bash
+$ clj -A:useless
+```
    
 ## Sources
 
