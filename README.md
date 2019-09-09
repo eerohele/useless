@@ -63,8 +63,8 @@ Interactive code blocks are powered by [Parinfer](https://shaunlebron.github.io/
 
 ## How it works
 
-Useless establishes a WebSocket connection that relays your code to an nREPL
-server and sends the result back to your browser.
+Useless establishes a WebSocket connection that mediates your code between an
+nREPL server and your browser.
 
 By default, Useless starts an nREPL server and connects to it. That means that
 you can evaluate any Clojure code and any code that uses whatever dependencies
