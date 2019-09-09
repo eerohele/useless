@@ -110,7 +110,9 @@ particular way, except to prevent it from listening on all IP addresses
 
 I don't know. You tell me. Tutorials? Interactive documentation? Onboarding a
 new developer by acquainting them with a library or microservice via an
-interactive Markdown document? Shitty literate programming?
+interactive Markdown document? Shitty literate programming? Embed an nREPL
+server into your application and create an interactive Markdown document
+to annotate some aspect of it?
 
 Please let me know whether this library is worth its name.
 
