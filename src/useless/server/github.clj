@@ -31,14 +31,9 @@
    :headers {"Content-Type" "text/html"}})
 
 
-(defn- readme-uri
-  [organization repository]
-  (format "https://api.github.com/repos/%s/%s/readme" organization repository))
-
-
-(defn- fetch-readme
-  [organization repository]
-  (let [content (-> @(http/get (readme-uri organization repository) {:headers headers})
+(defn get-content-as-string
+  [uri]
+  (let [content (-> @(http/get uri {:headers headers})
                     :body
                     bytes/to-reader
                     (json/read :key-fn keyword)
@@ -46,8 +41,25 @@
     (bytes/to-string (.decode (Base64/getMimeDecoder) content))))
 
 
+(defn- fetch-readme
+  [owner repo]
+  (get-content-as-string (format "https://api.github.com/repos/%s/%s/readme" owner repo)))
+
+
 (defn readme
-  [port {{:keys [organization repository]} :path-params}]
+  [port {{:keys [owner repo]} :path-params}]
   {:status  200
-   :body    (html/render port (fetch-readme organization repository))
+   :body    (html/render port (fetch-readme owner repo))
+   :headers {"Content-Type" "text/html"}})
+
+
+(defn- fetch-file
+  [owner repo path]
+  (get-content-as-string (format "https://api.github.com/repos/%s/%s/contents/%s" owner repo path)))
+
+
+(defn file
+  [port {{:keys [owner repo path]} :path-params}]
+  {:status  200
+   :body    (html/render port (fetch-file owner repo path))
    :headers {"Content-Type" "text/html"}})

@@ -42,8 +42,10 @@
         {:middleware [[wrap-defaults site-defaults]]}
         ["/gist/:id"
          {:get {:handler (partial github/gist port)}}]
-        ["/readme/github/:organization/:repository"
+        ["/readme/github/:owner/:repo"
          {:get {:handler (partial github/readme port)}}]
+        ["/github/file/:owner/:repo/:path"
+         {:get {:handler (partial github/file port)}}]
         ["/file/{*path}"
          {:get {:handler (partial file port)}}]
         ["/classpath/{*path}"
