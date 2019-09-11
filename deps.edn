@@ -1,28 +1,29 @@
 {:paths   ["src" "resources"]
 
- :deps    {org.clojure/clojure                            {:mvn/version "1.10.1"}
-           org.clojure/tools.logging                      {:mvn/version "0.5.0"}
-           org.clojure/data.json                          {:mvn/version "0.2.6"}
-           org.clojure/tools.cli                          {:mvn/version "0.4.2"}
+ :deps    {org.clojure/clojure                                   {:mvn/version "1.10.1"}
+           org.clojure/tools.logging                             {:mvn/version "0.5.0"}
+           org.clojure/data.json                                 {:mvn/version "0.2.6"}
+           org.clojure/tools.cli                                 {:mvn/version "0.4.2"}
 
-           aleph                                          {:mvn/version "0.4.6"}
-           haslett                                        {:mvn/version "0.1.6"}
-           integrant                                      {:mvn/version "0.7.0"}
-           nrepl/nrepl                                    {:mvn/version "0.6.0"}
-           metosin/reitit-ring                            {:mvn/version "0.3.9"}
-           metosin/reitit-middleware                      {:mvn/version "0.3.9"}
-           ring/ring-defaults                             {:mvn/version "0.3.2"}
-           selmer                                         {:mvn/version "1.12.17"}
-           lilactown/hx                                   {:mvn/version "0.5.3"}
-           bk/ring-gzip                                   {:mvn/version "0.3.0"}
-           spootnik/unilog                                {:mvn/version "0.7.24"}
-           com.vladsch.flexmark/flexmark                  {:mvn/version "0.50.36"}
-           com.vladsch.flexmark/flexmark-ext-tables       {:mvn/version "0.50.36"}
-           com.vladsch.flexmark/flexmark-ext-gfm-tasklist {:mvn/version "0.50.36"}
+           aleph                                                 {:mvn/version "0.4.6"}
+           haslett                                               {:mvn/version "0.1.6"}
+           integrant                                             {:mvn/version "0.7.0"}
+           nrepl/nrepl                                           {:mvn/version "0.6.0"}
+           metosin/reitit-ring                                   {:mvn/version "0.3.9"}
+           metosin/reitit-middleware                             {:mvn/version "0.3.9"}
+           ring/ring-defaults                                    {:mvn/version "0.3.2"}
+           selmer                                                {:mvn/version "1.12.17"}
+           lilactown/hx                                          {:mvn/version "0.5.3"}
+           bk/ring-gzip                                          {:mvn/version "0.3.0"}
+           spootnik/unilog                                       {:mvn/version "0.7.24"}
+           com.vladsch.flexmark/flexmark                         {:mvn/version "0.50.36"}
+           com.vladsch.flexmark/flexmark-ext-tables              {:mvn/version "0.50.36"}
+           com.vladsch.flexmark/flexmark-ext-gfm-tasklist        {:mvn/version "0.50.36"}
+           com.vladsch.flexmark/flexmark-ext-jekyll-front-matter {:mvn/version "0.50.36"}
 
            ;; remove when https://github.com/ring-clojure/ring/issues/367 is resolved
-           joda-time/joda-time                            {:mvn/version "2.10.3"}
-           clj-time                                       {:mvn/version "0.15.2"}}
+           joda-time/joda-time                                   {:mvn/version "2.10.3"}
+           clj-time                                              {:mvn/version "0.15.2"}}
 
  :aliases {:dev      {:extra-paths ["dev"]
                       :extra-deps  {org.clojure/test.check {:mvn/version "0.10.0"}
