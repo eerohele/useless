@@ -48,6 +48,7 @@ Useless can work on Markdown documents in one of these sources:
 - Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown)
 - Gist: [http://localhost:1234/d/gist/e1dca953548bfdfb9844](http://localhost:1234/d/gist/e1dca953548bfdfb9844)
 - GitHub README: [http://localhost:1234/d/readme/github/ztellman/manifold](http://localhost:1234/d/readme/github/ztellman/manifold)
+- GitHub file: [http://localhost:1234/d/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown](http://localhost:1234/d/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown)
 
 ## Evaluating forms
 
