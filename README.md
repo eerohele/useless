@@ -116,13 +116,3 @@ server into your application and create an interactive Markdown document
 to annotate some aspect of it?
 
 Please let me know whether this library is worth its name.
-
-## TODO
-
-- Support `println` etc.
-- Look for easier ways to use dependencies
-- Add caching for GitHub content
-- Encode nREPL messages as Transit over the wire?
-- Improve styles
-- Support images
-- This README is quite bad
