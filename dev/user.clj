@@ -5,6 +5,9 @@
             [useless.server.app :as app]))
 
 
+(set! *warn-on-reflection* true)
+
+
 (repl/set-prep! (constantly app/config))
 
 
