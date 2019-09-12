@@ -1,12 +1,10 @@
 (ns useless.client.editor
-  (:require [hx.react :as hx :include-macros true]
-            [hx.hooks :as hooks]
-            [useless.client.websocket :as websocket]
+  (:require [reagent.core :as reagent]
+            [re-frame.core :as re-frame]
             ["codemirror" :as CodeMirror]
             ["codemirror/mode/clojure/clojure"]
             ["codemirror/addon/edit/matchbrackets"]
-            ["parinfer-codemirror" :as parinfer-codemirror]
-            ["react" :as react]))
+            ["parinfer-codemirror" :as parinfer-codemirror]))
 
 
 (defn string-between-matching-brackets
@@ -38,36 +36,24 @@
       (.getValue editor))))
 
 
-(hx/defnc <CodeBlock>
-  [{:keys [initial-value mode]}]
-  (let [mount-point (react/useRef nil)
-        [result update-result] (hooks/useState nil)
-        editable? (= mode "clojure")]
-    (hooks/useEffect
-      (fn []
-        ;; TODO: CodeMirror initialization doesn't support hot-reloading.
-        ;;
-        ;; Would be nice if it did, but I'm not sure how to make that work.
-        (let [options #js {:value          initial-value
-                           :lineNumbers    false
-                           :viewportMargin js/Infinity
-                           :matchBrackets  true
-                           :mode           mode
-                           :readOnly       (not editable?)
-                           :theme          "dracula"}
-              editor (CodeMirror. (.-current mount-point) options)]
-          (when editable?
-            (let [event-handler #(websocket/evaluate update-result (code-string %))]
-              (.setOption editor "extraKeys" #js {:Cmd-Enter  event-handler
-                                                  :Ctrl-Enter event-handler}))
-            (parinfer-codemirror/init editor))))
-      [])
-    [:div {:class "codeblock"}
-     [:div {:class "editor" :ref mount-point}]
-     [:div {:class "evaluation-result"}
-      [:code
-       [:span {:class "ns"} (:ns result)]
-       (when-some [values (:value result)]
-         [:span {:class "value"} (last values)])
-       (when-some [err (:err result)]
-         [:span {:class "err"} err])]]]))
+(defn <CodeBlock>
+  [{:keys [mode initial-value]}]
+  (reagent/create-class
+    {:component-did-mount (fn [this]
+                            (let [read-only? (not= mode "clojure")
+                                  options #js {:value          initial-value
+                                               :lineNumbers    false
+                                               :matchBrackets  true
+                                               :mode           mode
+                                               :readOnly       read-only?
+                                               :theme          "dracula"}
+                                  editor (CodeMirror. (reagent/dom-node this) options)]
+                              (when-not read-only?
+                                (let [event-handler #(re-frame/dispatch [:editor/evaluate (code-string %)])]
+                                  (.setOption editor "extraKeys" #js {:Cmd-Enter  event-handler
+                                                                      :Ctrl-Enter event-handler}))
+                                ;; https://github.com/shaunlebron/parinfer-codemirror/issues/11
+                                (parinfer-codemirror/init editor))))
+
+     :reagent-render      (fn [_ _ _]
+                            [:div.codeblock])}))

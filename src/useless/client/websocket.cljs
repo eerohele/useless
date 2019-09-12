@@ -1,24 +1,9 @@
 (ns useless.client.websocket
-  (:require [clojure.edn :as edn]
-            [cljs.core.async :as async :include-macros true]
+  (:require [cljs.core.async :as async :include-macros true]
             [haslett.client :as client]))
 
 
-(def !stream (atom nil))
-
-
-(defn message
-  [value]
-  (pr-str {:op "eval" :code value}))
-
-
-(defn evaluate
-  [update-fn value]
-  (let [{:keys [sink source]} (deref !stream)]
-    (async/go
-     (async/>! sink (message value))
-     (let [result-message (edn/read-string (async/<! source))]
-       (update-fn (fn [_] result-message))))))
+(defonce !stream (atom nil))
 
 
 (defn endpoint
@@ -31,14 +16,11 @@
   (client/connect (endpoint port)))
 
 
+(def connected? client/connected?)
+
+
 (defn switch!
   [port]
   (async/go
-    (when (some? @!stream)
-      (client/close @!stream))
+    (when @!stream (client/close @!stream))
     (reset! !stream (async/<! (connect port)))))
-
-
-(defn connected?
-  []
-  (client/connected? @!stream))

@@ -7,6 +7,8 @@
     --color-link-hover: hsla(265, 89%, 78%, 0.7);
     --color-evaluation-result-namespace: hsla(231, 23%, 61%, 1);
     --color-codeblock-border: hsla(231, 14%, 27%, 1);
+
+    --header-height: 34px;
 }
 
 html,
@@ -52,10 +54,11 @@ a:focus {
     color: var(--color-link-hover);
 }
 
-/* Connection status */
+/* Status bar */
 
 header {
     color: #fff;
+    height: var(--header-height);
     position: fixed;
     top: 0;
     left: 0;
@@ -114,24 +117,65 @@ header .connection-status.disconnected {
     margin-left: -15px;
 }
 
-.codeblock .evaluation-result {
+/* Evaluation result */
+
+aside {
+    background: var(--color-background);
+    border-left: 5px solid var(--color-codeblock-border);
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100vh;
+    opacity: .9;
+    overflow: auto;
+    position: fixed;
+    resize: vertical;
+    right: 0;
+    top: var(--header-height);
+    width: 50%;
+    z-index: 4;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: 0 0 var(--header-height) 0;
+    padding: 0;
+}
+
+aside button {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    position: fixed;
+    right: 6px;
+    top: 40px;
+    transition: color 150ms ease-in-out;
+}
+
+aside button:hover {
+    color: var(--color-link);
+}
+
+.evaluation-result {
+    margin: .5em 0;
     padding-left: .5rem;
 }
 
-.codeblock .evaluation-result code {
+.evaluation-result code {
     font: 0.9rem/1.2 var(--font-family-monospace);
 }
 
-.codeblock .evaluation-result .ns:not(:empty) {
+.evaluation-result .ns:not(:empty) {
     color: var(--color-evaluation-result-namespace);
     padding: .25em .5rem .25em 0;
 }
 
-.codeblock .evaluation-result .value {
+.evaluation-result .value {
     color: hsl(135, 94%, 65%);
 }
 
-.codeblock .evaluation-result .err {
+.evaluation-result .err {
     color: hsl(0, 100%, 67%);
 }
 
