@@ -3,6 +3,8 @@ Useless
 
 Make the Clojure code blocks in Markdown documents interactive.
 
+![Screenshot of Useless](https://gist.githubusercontent.com/eerohele/b4c84928cc9cdb664cb97b39eaf14688/raw/486a31f96ab50f6fdf7a6190216405a615105bb0/useless.png)
+
 ## Quick start
 
 You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_started#_clojure_installer_and_cli_tools) installed.
