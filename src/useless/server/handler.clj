@@ -44,7 +44,7 @@
          {:get {:handler (partial github/gist port)}}]
         ["/readme/github/:owner/:repo"
          {:get {:handler (partial github/readme port)}}]
-        ["/github/file/:owner/:repo/:path"
+        ["/github/file/:owner/:repo/{*path}"
          {:get {:handler (partial github/file port)}}]
         ["/file/{*path}"
          {:get {:handler (partial file port)}}]
