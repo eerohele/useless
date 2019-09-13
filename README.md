@@ -10,7 +10,7 @@ You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_sta
 1. Run:
 
     ```bash
-    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "ff009f40aeeedb4dcc282440cca26171fc1e967c"}}}' -m useless.cli
+    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "20d8420c6282d25b93b90c03b05540db11c6a397"}}}' -m useless.cli
     Listening on http://[::1]:1234
     ```
 
