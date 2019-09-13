@@ -10,7 +10,7 @@ You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_sta
 1. Run:
 
     ```bash
-    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "20d8420c6282d25b93b90c03b05540db11c6a397"}}}' -m useless.cli
+    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "27227d75c898630eef7514b53348c72d47c85229"}}}' -m useless.cli
     Listening on http://[::1]:1234
     ```
 
@@ -73,21 +73,32 @@ Useless might have at that point in time.
 
 ## Using dependencies
 
-You can also tell Useless to connect to another nREPL server. For example, if
-you want to use Useless to work through the examples in the README for Renzo
-Borgatti's [`parallel`](https://github.com/reborg/parallel) library, you can
-first start an nREPL server that includes it as a dependency:
+If you're not afraid of conflicts, you can add dependencies with `-Sdeps`. If
+you want an interactive version of the
+[Meander](https://github.com/noprompt/meander) README, for example, you can do
+this:
+
+```bash
+# If you have the appropriate alias in your `~/.clojure/deps.edn`:
+$ clj -A:useless -Sdeps '{:deps {meander/delta {:mvn/version "RELEASE"}}}'
+```
+
+However, there's a chance Useless uses a different version of the library you
+add a dependency to. If you want to avoid conflicts, you can also tell Useless
+to connect to another nREPL server. For example, if you want to use Useless to
+work through the examples in the README for Renzo Borgatti's
+[`parallel`](https://github.com/reborg/parallel) library, you can first start an
+nREPL server that includes it as a dependency:
 
 ```bash
 # You can make this invocation a bit shorter if you add an alias for nREPL
 # in your `~/.clojure/deps.edn`: https://nrepl.org/nrepl/0.6.0/usage/server.html
-$ clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "0.10"}}}' -m nrepl.cmdline --port 31337
+$ clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "RELEASE"}}}' -m nrepl.cmdline --port 31337
 ```
 
 Then, you can start Useless and tell it to use the nREPL server you started:
 
 ```bash
-# If you have the appropriate alias in your `~/.clojure/deps.edn`:
 $ clj -A:useless --nrepl-port 31337
 Listening on http://[::1]:1234
 
