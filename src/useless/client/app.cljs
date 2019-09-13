@@ -51,7 +51,8 @@
   []
   [:<>
    [:ul
-    (for [{:keys [ns value err]} @(re-frame/subscribe [:editor/results])]
+    (for [{:keys [id ns value err]} @(re-frame/subscribe [:editor/results])]
+      ^{:key id}
       [:li
        [:pre.evaluation-result
         [:code

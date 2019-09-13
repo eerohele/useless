@@ -71,7 +71,7 @@
 
 (defn- push
   [max-size xs x]
-  (conj (if (< (count xs) max-size) xs (vec (next xs))) x))
+  (cons x (if (< (count xs) max-size) xs (butlast xs))))
 
 
 (re-frame/reg-event-db
@@ -83,7 +83,7 @@
 (re-frame/reg-sub
   :editor/results
   (fn [{:keys [editor/results]} _]
-    results))
+    (reverse results)))
 
 
 (re-frame/reg-event-db
