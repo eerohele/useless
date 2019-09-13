@@ -137,7 +137,7 @@ aside {
 
 aside ul {
     list-style-type: none;
-    margin: 0 0 var(--header-height) 0;
+    margin: 0 0 calc(var(--header-height) + 10px) 0;
     padding: 0;
 }
 
