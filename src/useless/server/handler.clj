@@ -38,18 +38,21 @@
         {:get {:handler    nrepl-handler
                :middleware [[wrap-params]
                             [wrap-keyword-params]]}}]
-       ["/d"
-        {:middleware [[wrap-defaults site-defaults]]}
-        ["/gist/:id"
-         {:get {:handler (partial github/gist port)}}]
-        ["/readme/github/:owner/:repo"
-         {:get {:handler (partial github/readme port)}}]
-        ["/github/file/:owner/:repo/{*path}"
-         {:get {:handler (partial github/file port)}}]
-        ["/file/{*path}"
-         {:get {:handler (partial file port)}}]
-        ["/classpath/{*path}"
-         {:get {:handler (partial resource port)}}]]
+       ["/gist/:id"
+        {:get        {:handler (partial github/gist port)}
+         :middleware [[wrap-defaults site-defaults]]}]
+       ["/github/readme/:owner/:repo"
+        {:get        {:handler (partial github/readme port)}
+         :middleware [[wrap-defaults site-defaults]]}]
+       ["/github/file/:owner/:repo/{*path}"
+        {:get        {:handler (partial github/file port)}
+         :middleware [[wrap-defaults site-defaults]]}]
+       ["/file/{*path}"
+        {:get        {:handler (partial file port)}
+         :middleware [[wrap-defaults site-defaults]]}]
+       ["/classpath/{*path}"
+        {:get        {:handler (partial resource port)}
+         :middleware [[wrap-defaults site-defaults]]}]
        ["/assets/*" (ring/create-resource-handler)]])
     (ring/create-default-handler)
     {:middleware [[wrap-gzip]]}))
