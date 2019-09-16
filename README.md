@@ -12,19 +12,11 @@ You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_sta
 1. Run:
 
     ```bash
-    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "4ae4d0bde5b32c7108b480f954c08962e0dc52cc"}}}' -m useless.cli
+    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "01b6f95505c385de05385be54c4f33441ffa0fe4"}}}' -m useless.cli
     Listening on http://[::1]:1234
     ```
 
-1. Open [http://localhost:1234/d/readme/github/eerohele/useless](http://localhost:1234/d/readme/github/eerohele/useless) in your favorite browser and start evaluating things.
-
-    ```clojure
-    ;; Press Cmd-Enter (macOS) or Ctrl-Enter to evaluate things.
-
-    (require '[clojure.string :as string])
-
-    (string/upper-case "Hello, world!")
-    ```
+1. Open [http://localhost:1234/classpath/vendor/example.markdown](http://localhost:1234/classpath/vendor/example.markdown) in your favorite browser and start evaluating things.
 
 ## Alias
 
@@ -44,13 +36,15 @@ $ clj -A:useless
    
 ## Sources
 
-Useless can work on Markdown documents in one of these sources:
+Useless can handle Markdown documents from one of these sources:
 
-- File: [http://localhost:1234/d/file/README.md](http://localhost:1234/d/file/README.md)
-- Classpath resource: [http://localhost:1234/d/classpath/vendor/example.markdown](http://localhost:1234/d/classpath/vendor/example.markdown)
-- Gist: [http://localhost:1234/d/gist/e1dca953548bfdfb9844](http://localhost:1234/d/gist/e1dca953548bfdfb9844)
-- GitHub README: [http://localhost:1234/d/readme/github/ztellman/manifold](http://localhost:1234/d/readme/github/ztellman/manifold)
-- GitHub file: [http://localhost:1234/d/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown](http://localhost:1234/d/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown)
+| Source | URI |
+|------|-------|
+| File | [http://localhost:1234/file/README.md](http://localhost:1234/file/README.md) |
+| Classpath | [http://localhost:1234/classpath/vendor/example.markdown](http://localhost:1234/classpath/vendor/example.markdown) |
+| Gist | [http://localhost:1234/gist/e1dca953548bfdfb9844](http://localhost:1234/gist/e1dca953548bfdfb9844) |
+| GitHub README | [http://localhost:1234/github/readme/ztellman/manifold](http://localhost:1234/github/readme/ztellman/manifold) |
+| GitHub file | [http://localhost:1234/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown](http://localhost:1234/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown) |
 
 ## Evaluating forms
 
@@ -81,8 +75,8 @@ you want an interactive version of the
 this:
 
 ```bash
-# If you have the appropriate alias in your `~/.clojure/deps.edn`:
-$ clj -A:useless -Sdeps '{:deps {meander/delta {:mvn/version "RELEASE"}}}'
+# If you have the appropriate alias in your `~/.clojure/deps.edn`:  
+$ clj -A:useless -Sdeps '{:deps {meander/epsilon {:mvn/version "RELEASE"}}}'
 ```
 
 However, there's a chance Useless uses a different version of the library you
@@ -104,7 +98,7 @@ Then, you can start Useless and tell it to use the nREPL server you started:
 $ clj -A:useless --nrepl-port 31337
 Listening on http://[::1]:1234
 
-$ open http://[::1]:1234/d/readme/github/reborg/parallel
+$ open http://[::1]:1234/github/readme/reborg/parallel
 ```
 
 Liberal use of aliases can make things rather more succinct when it comes to
