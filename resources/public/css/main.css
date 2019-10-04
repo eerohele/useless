@@ -171,6 +171,10 @@ aside button:hover {
     padding: .25em .5rem .25em 0;
 }
 
+.evaluation-result .out {
+    color: hsl(191, 97%, 77%);
+}
+
 .evaluation-result .value {
     color: hsl(135, 94%, 65%);
 }

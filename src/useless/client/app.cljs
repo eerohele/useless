@@ -51,11 +51,13 @@
   []
   [:<>
    [:ul
-    (for [{:keys [id ns value err]} @(re-frame/subscribe [:editor/results])]
+    (for [{:keys [id ns out value err]} @(re-frame/subscribe [:editor/results])]
       ^{:key id}
       [:li
        [:pre.evaluation-result
         [:code
+         (when out
+           [:span.out out])
          [:span.ns ns]
          (when value
            [:span.value (last value)])
