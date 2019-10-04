@@ -25,7 +25,7 @@
            joda-time/joda-time                                   {:mvn/version "2.10.3"}
            clj-time                                              {:mvn/version "0.15.2"}}
 
- :aliases {:dev      {:extra-paths ["dev"]
+ :aliases {:dev      {:extra-paths ["dev" "target/cljs"]
                       :extra-deps  {org.clojure/test.check {:mvn/version "0.10.0"}
                                     integrant/repl         {:mvn/version "0.3.1"}
                                     binaryage/devtools     {:mvn/version "0.9.10"}
