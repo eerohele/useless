@@ -3,7 +3,7 @@ Useless
 
 Make the Clojure code blocks in Markdown documents interactive.
 
-![Screenshot of Useless](https://gist.githubusercontent.com/eerohele/b4c84928cc9cdb664cb97b39eaf14688/raw/486a31f96ab50f6fdf7a6190216405a615105bb0/useless.png)
+![Screenshot of Useless](https://gist.githubusercontent.com/eerohele/b4c84928cc9cdb664cb97b39eaf14688/raw/5c79a1a068c74ac1c0046a6c1cf1e375c600efde/useless.png)
 
 ## Quick start
 
