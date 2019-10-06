@@ -8,7 +8,7 @@
 (set! *warn-on-reflection* true)
 
 
-(repl/set-prep! (constantly app/config))
+(repl/set-prep! (constantly app/default-config))
 
 
 (comment

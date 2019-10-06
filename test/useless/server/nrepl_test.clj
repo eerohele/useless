@@ -12,7 +12,7 @@
 
 (defn with-test-system
   [keys f]
-  (let [system (ig/init (assoc-in app/config [::http/server :port] 0) keys)]
+  (let [system (ig/init (assoc-in app/default-config [::http/server :port] 0) keys)]
     (try
       (f system)
       (catch Exception ex
