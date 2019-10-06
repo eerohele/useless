@@ -3,7 +3,6 @@
             [reagent.core :as reagent]
             [re-frame.core :as re-frame]
             [useless.client.editor :as editor]
-            [useless.client.websocket :as websocket]
             [useless.client.epoch]))
 
 
