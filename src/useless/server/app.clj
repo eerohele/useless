@@ -27,9 +27,9 @@
 (defn start!
   ([]
    (start! default-config))
-  ([{uri        :uri
-     nrepl-port :nrepl-port
-     http-port  :http-port}]
+  ([{{uri        :uri
+      nrepl-port :nrepl-port
+      http-port  :http-port} :options}]
    (cond-> default-config
            uri (assoc-in [::handler/app :uri] uri)
            http-port (assoc-in [::http/server :port] http-port)
