@@ -12,11 +12,12 @@ You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_sta
 1. Run:
 
     ```bash
-    $ clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "01b6f95505c385de05385be54c4f33441ffa0fe4"}}}' -m useless.cli
-    Listening on http://[::1]:1234
+    clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "1a947ca9d21c36307184c8a123f9407945fadc31"}}}' \
+        -m useless.cli \
+        --uri https://gist.github.com/john2x/e1dca953548bfdfb9844
     ```
 
-1. Open [http://localhost:1234/classpath/vendor/example.markdown](http://localhost:1234/classpath/vendor/example.markdown) in your favorite browser and start evaluating things.
+1. Start evaluating forms with <kbd>Cmd</kbd> + <kbd>Enter</kbd> (macOS) or <kbd>Ctrl</kbd> + <kbd>Enter</kbd> (Windows).
 
 ## Alias
 
@@ -31,7 +32,7 @@ To make launching Useless easier, you can add an alias like this in your `~/.clo
 Then, you can run Useless like this:
 
 ```bash
-$ clj -A:useless
+clj -A:useless --uri https://gist.github.com/john2x/e1dca953548bfdfb9844
 ```
    
 ## Sources
@@ -76,7 +77,9 @@ this:
 
 ```bash
 # If you have the appropriate alias in your `~/.clojure/deps.edn`:  
-$ clj -A:useless -Sdeps '{:deps {meander/epsilon {:mvn/version "RELEASE"}}}'
+clj -A:useless \
+    -Sdeps '{:deps {meander/epsilon {:mvn/version "RELEASE"}}}' \
+    --uri https://github.com/noprompt/meander/blob/epsilon/README.md
 ```
 
 However, there's a chance Useless uses a different version of the library you
@@ -89,16 +92,17 @@ nREPL server that includes it as a dependency:
 ```bash
 # You can make this invocation a bit shorter if you add an alias for nREPL
 # in your `~/.clojure/deps.edn`: https://nrepl.org/nrepl/0.6.0/usage/server.html
-$ clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "RELEASE"}}}' -m nrepl.cmdline --port 31337
+clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "RELEASE"}}}' \
+    -m nrepl.cmdline \
+    --port 31337
 ```
 
 Then, you can start Useless and tell it to use the nREPL server you started:
 
 ```bash
-$ clj -A:useless --nrepl-port 31337
-Listening on http://[::1]:1234
-
-$ open http://[::1]:1234/github/readme/reborg/parallel
+clj -A:useless \
+    --nrepl-port 31337 \
+    --uri https://github.com/reborg/parallel/blob/master/README.md
 ```
 
 Liberal use of aliases can make things rather more succinct when it comes to
