@@ -20,8 +20,8 @@
 
 (defn -main
   [& args]
-  (let [{{uri :uri} :options :as options} (cli/parse-opts args specification)]
-    (app/start! options)
+  (let [{{uri :uri} :options :as parsed-opts} (cli/parse-opts args specification)]
+    (app/start! (:options parsed-opts))
     (if (some? uri)
       (browse/browse-url "http://[::1]:1234")
       (println "Listening on http://[::1]:1234"))))
