@@ -10,16 +10,26 @@
 
 
 (def ^:private flexmark-extensions
-  [(TablesExtension/create) (TaskListExtension/create) (JekyllFrontMatterExtension/create)])
+  [(TablesExtension/create)
+   (TaskListExtension/create)
+   (JekyllFrontMatterExtension/create)])
+
+
+(def ^:private options
+  (MutableDataSet.))
+
+
+(def ^:private parser
+  (.build (.extensions (Parser/builder options) flexmark-extensions)))
+
+
+(def ^:private renderer
+  (.build (HtmlRenderer/builder options)))
 
 
 (defn markdown->html-string
   [input-string]
-  (let [options (MutableDataSet.)
-        parser (.build (.extensions (Parser/builder options) flexmark-extensions))
-        renderer (.build (HtmlRenderer/builder options))
-        document (.parse parser input-string)]
-    (.render renderer document)))
+  (->> input-string (.parse parser) (.render renderer)))
 
 
 (defn render
