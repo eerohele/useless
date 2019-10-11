@@ -111,7 +111,14 @@
     (code-blocks))
 
   (reagent/render [<StatusBar>] header)
-  (reagent/render [<Results>] aside))
+  (reagent/render [<Results>] aside)
+
+  ;; For some reason, the page tends to open up scrolled halfway down to the
+  ;; middle of the page.
+  ;;
+  ;; This here's a hack that ensures that the page is scrolled up to the top of
+  ;; the page.
+  (.scrollTo js/window 0 0))
 
 
 (start!)
