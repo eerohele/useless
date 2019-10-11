@@ -1,12 +1,17 @@
 (ns useless.server.response
-  (:require [aleph.http :as http]
+  (:require [clojure.core.cache.wrapped :as cache]
+            [aleph.http :as http]
             [byte-streams :as bytes]
             [useless.server.html :as html]))
 
 
+(def ^:private cache
+  (cache/ttl-cache-factory {} :ttl 3600))
+
+
 (defn- read-body
   [uri]
-  (-> @(http/get (.toString uri) {:headers {"User-Agent" "aleph"}})
+  (-> @(http/get uri {:headers {"User-Agent" "aleph"}})
       :body
       bytes/to-string))
 
@@ -14,5 +19,7 @@
 (defn ok
   [port parse-fn uri]
   {:status  200
-   :body    (->> uri (read-body) (parse-fn) (html/render port))
+   :body    (->> (cache/lookup-or-miss cache (.toString uri) read-body)
+                 (parse-fn)
+                 (html/render port))
    :headers {"Content-Type" "text/html"}})
