@@ -10,8 +10,10 @@
            haslett                                               {:mvn/version "0.1.6"}
            integrant                                             {:mvn/version "0.7.0"}
            nrepl/nrepl                                           {:mvn/version "0.6.0"}
-           metosin/reitit-ring                                   {:mvn/version "0.3.10"}
+           metosin/reitit-ring                                   {:mvn/version "0.3.10"
+                                                                  :exclusions  [ring/ring-core]}
            metosin/reitit-middleware                             {:mvn/version "0.3.10"}
+           ring/ring-core                                        {:mvn/version "1.8.0"}
            ring/ring-defaults                                    {:mvn/version "0.3.2"}
            selmer                                                {:mvn/version "1.12.17"}
            re-frame                                              {:mvn/version "0.11.0-rc1"}
@@ -20,11 +22,7 @@
            com.vladsch.flexmark/flexmark                         {:mvn/version "0.50.44"}
            com.vladsch.flexmark/flexmark-ext-tables              {:mvn/version "0.50.44"}
            com.vladsch.flexmark/flexmark-ext-gfm-tasklist        {:mvn/version "0.50.44"}
-           com.vladsch.flexmark/flexmark-ext-jekyll-front-matter {:mvn/version "0.50.44"}
-
-           ;; remove when https://github.com/ring-clojure/ring/issues/367 is resolved
-           joda-time/joda-time                                   {:mvn/version "2.10.5"}
-           clj-time                                              {:mvn/version "0.15.2"}}
+           com.vladsch.flexmark/flexmark-ext-jekyll-front-matter {:mvn/version "0.50.44"}}
 
  :aliases {:dev      {:extra-paths ["dev" "target/cljs"]
                       :extra-deps  {org.clojure/test.check {:mvn/version "0.10.0"}
