@@ -6,7 +6,7 @@
            org.clojure/tools.cli                                 {:mvn/version "0.4.2"}
            org.clojure/core.cache                                {:mvn/version "0.8.2"}
 
-           aleph                                                 {:mvn/version "0.4.6"}
+           aleph                                                 {:mvn/version "0.4.7-alpha5"}
            haslett                                               {:mvn/version "0.1.6"}
            integrant                                             {:mvn/version "0.7.0"}
            nrepl/nrepl                                           {:mvn/version "0.6.0"}
