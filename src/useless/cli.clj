@@ -12,7 +12,7 @@
    ["-p" "--http-port PORT" "HTTP server port number"
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 1024 % 0x10000) "Must be a number between 1024 and 65536"]]
-   ["-n" "--nrepl-port PORT" "nREPL server port number"
+   ["-r" "--prepl-port PORT" "pREPL server port number"
     :parse-fn #(Integer/parseInt %)
     :validate [#(< 1024 % 0x10000) "Must be a number between 1024 and 65536"]]
    ["-h" "--help"]])

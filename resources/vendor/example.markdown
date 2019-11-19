@@ -6,6 +6,14 @@ A single successful function call:
 (+ 1 2)
 ```
 
+`println` and return value:
+
+```clojure
+(do
+  (println "Hello, world!")
+  (zipmap [:a :b :c] [1 2 3]))
+```
+
 A largish response map:
 
 ```clojure
@@ -39,7 +47,7 @@ Changing namespaces:
 (sum (repeatedly 5 rand))
 ```
 
-One page comprises a single nREPL session.
+One page comprises a single REPL session.
 
 Code block #1:
 
@@ -51,6 +59,18 @@ Code block #2:
 
 ```clojure
 (string/upper-case "hello, world!")
+```
+
+Long-running tasks:
+
+```clojure
+(do (Thread/sleep 1000) (rand))
+```
+
+Opaque objects:
+
+```clojure
+(future (+ 1 2))
 ```
 
 A non-Clojure code block:

@@ -4,17 +4,24 @@
             [unilog.config :as unilog]
             [useless.server.handler :as handler]
             [useless.server.http :as http]
-            [useless.server.nrepl :as nrepl]))
-
+            [useless.server.prepl :as prepl]
+            [clojure.tools.logging :as log]))
 
 (unilog/start-logging! {:appenders [{:appender :console
                                      :encoder  :json}]
 
                         :overrides {"useless.server.http"  :info
-                                    "useless.server.nrepl" :info
+                                    "useless.server.prepl" :info
                                     "org.xnio"             :warn
                                     "org.xnio.nio"         :warn
                                     "org.jboss.threads"    :warn}})
+
+
+(Thread/setDefaultUncaughtExceptionHandler
+  (reify Thread$UncaughtExceptionHandler
+    (uncaughtException [_ thread ex]
+      (log/error ex "Uncaught exception on" (.getName thread)))))
+
 
 
 (def default-config
@@ -28,13 +35,13 @@
   ([]
    (start! default-config))
   ([{uri        :uri
-     nrepl-port :nrepl-port
+     prepl-port :prepl-port
      http-port  :http-port}]
    (cond-> default-config
            uri (assoc-in [::handler/app :uri] uri)
            http-port (assoc-in [::http/server :port] http-port)
-           nrepl-port (assoc-in [::nrepl/server :port] nrepl-port)
-           nrepl-port (assoc-in [::nrepl/server :provided?] true)
+           prepl-port (assoc-in [::prepl/server :port] prepl-port)
+           prepl-port (assoc-in [::prepl/server :provided?] true)
            true ig/init)))
 
 

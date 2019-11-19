@@ -1,6 +1,5 @@
 (ns useless.client.epoch
-  (:require [clojure.edn :as edn]
-            [cljs.core.async :as async :include-macros true]
+  (:require [cljs.core.async :as async :include-macros true]
             [re-frame.core :as re-frame]
             [useless.client.websocket :as websocket]))
 
@@ -8,12 +7,12 @@
 (re-frame/reg-event-db
   :port/set
   (fn [db [_ port]]
-    (cond-> db (not (empty? port)) (assoc :nrepl/port (js/parseInt port)))))
+    (cond-> db (not (empty? port)) (assoc :prepl/port (js/parseInt port)))))
 
 
 (re-frame/reg-sub
   :port/get
-  (fn [{:keys [nrepl/port]} _]
+  (fn [{:keys [prepl/port]} _]
     port))
 
 
@@ -31,7 +30,7 @@
 
 (re-frame/reg-event-fx
   :port/switch
-  (fn [{{port :nrepl/port :as db} :db} _]
+  (fn [{{port :prepl/port :as db} :db} _]
     {:db               db
      :websocket/switch port
      :dispatch         [:port/set-editing false]}))
@@ -55,11 +54,8 @@
 
 (re-frame/reg-fx
   :websocket/evaluate
-  (fn [value]
-    (let [{:keys [sink source]} @websocket/!stream]
-      (async/go
-        (async/>! sink (pr-str {:op "eval" :code value}))
-        (re-frame/dispatch [:editor/add-result (edn/read-string (async/<! source))])))))
+  (fn [message]
+    (websocket/send message)))
 
 
 (re-frame/reg-event-fx
@@ -94,6 +90,6 @@
 
 (re-frame/reg-event-fx
   :app-db/initialize
-  (fn [{db :db} [_ {:keys [nrepl/port] :as data}]]
+  (fn [{db :db} [_ {:keys [prepl/port] :as data}]]
     {:db               (merge db data)
      :websocket/switch port}))

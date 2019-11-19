@@ -168,7 +168,8 @@ aside button:hover {
 
 .evaluation-result .ns:not(:empty) {
     color: var(--color-evaluation-result-namespace);
-    padding: .25em .5rem .25em 0;
+    float: right;
+    padding-right: .25rem;
 }
 
 .evaluation-result .out {

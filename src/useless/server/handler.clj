@@ -61,7 +61,7 @@
 
 
 (defmethod ig/init-key ::app
-  [_ {uri :uri nrepl-handler :handler/nrepl {port :port} :nrepl/server}]
+  [_ {uri :uri prepl-handler :handler/prepl {port :port} :prepl/server}]
   (ring/ring-handler
     (ring/router
       [["/"
@@ -69,7 +69,7 @@
                              (if uri (redirection-to uri) {:status 404}))
                :middleware [[wrap-defaults site-defaults]]}}]
        ["/repl"
-        {:get {:handler    nrepl-handler
+        {:get {:handler    prepl-handler
                :middleware [[wrap-params]
                             [wrap-keyword-params]]}}]
        ["/uri"

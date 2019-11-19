@@ -1,11 +1,11 @@
 {:useless.server.http/server   {:handler #ig/ref :useless.server.handler/app
                                 :port    1234}
 
- :useless.server.nrepl/server  {:bind      "127.0.0.1"
+ :useless.server.prepl/server  {:bind      "127.0.0.1"
                                 :port      0
                                 :provided? false}
 
- :useless.server.nrepl/handler {:timeout 15000}
+ :useless.server.prepl/handler {}
 
- :useless.server.handler/app   {:handler/nrepl #ig/ref :useless.server.nrepl/handler
-                                :nrepl/server  #ig/ref :useless.server.nrepl/server}}
+ :useless.server.handler/app   {:handler/prepl #ig/ref :useless.server.prepl/handler
+                                :prepl/server  #ig/ref :useless.server.prepl/server}}

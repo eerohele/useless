@@ -63,10 +63,10 @@ Interactive code blocks are powered by [Parinfer](https://shaunlebron.github.io/
 
 ## How it works
 
-Useless establishes a WebSocket connection that mediates your code between an
-nREPL server and your browser.
+Useless establishes a WebSocket connection that mediates your code between a
+prepl server and your browser.
 
-By default, Useless starts an nREPL server and connects to it. That means that
+By default, Useless starts an prepl server and connects to it. That means that
 you can evaluate any Clojure code and any code that uses whatever dependencies
 Useless might have at that point in time.
 
@@ -86,31 +86,41 @@ clj -A:useless \
 
 However, there's a chance Useless uses a different version of the library you
 add a dependency to. If you want to avoid conflicts, you can also tell Useless
-to connect to another nREPL server. For example, if you want to use Useless to
+to connect to another prepl server. For example, if you want to use Useless to
 work through the examples in the README for Renzo Borgatti's
 [`parallel`](https://github.com/reborg/parallel) library, you can first start an
-nREPL server that includes it as a dependency:
+prepl server that includes it as a dependency:
 
 ```bash
-# You can make this invocation a bit shorter if you add an alias for nREPL
-# in your `~/.clojure/deps.edn`: https://nrepl.org/nrepl/0.6.0/usage/server.html
-clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version "0.6.0"} parallel {:mvn/version "RELEASE"}}}' \
-    -m nrepl.cmdline \
-    --port 31337
+clj -J-Dclojure.server.jvm="{:port 31337 :accept clojure.core.server/io-prepl}" \
+    -Sdeps '{:deps {parallel {:mvn/version "RELEASE"}}}'
 ```
 
-Then, you can start Useless and tell it to use the nREPL server you started:
+Or, to make the invocation a bit shorter, you can first add an alias like this
+in your `~/.clojure/deps.edn`:
+
+```clojure
+:prepl {:jvm-opts ["-Dclojure.server.repl={:port,31337,:accept,clojure.core.server/io-prepl}"]}
+```
+
+Then, to run a prepl server that can use `parallel`, run:
+
+```bash
+clj -O:prepl -Sdeps '{:deps {parallel {:mvn/version "RELEASE"}}}'
+```
+
+Next, you can start Useless and tell it to use the prepl server you started:
 
 ```bash
 clj -A:useless \
-    --nrepl-port 31337 \
+    --prepl-port 31337 \
     --uri https://github.com/reborg/parallel/blob/master/README.md
 ```
 
 Liberal use of aliases can make things rather more succinct when it comes to
 using Useless.
 
-You can also change the port number of the nREPL server to connect to by
+You can also change the port number of the prepl server to connect to by
 clicking on the port number in the upper left-hand corner.
 
 ## Security
@@ -124,7 +134,7 @@ particular way, except to prevent it from listening on all IP addresses
 
 I don't know. You tell me. Tutorials? Interactive documentation? Onboarding a
 new developer by acquainting them with a library or microservice via an
-interactive Markdown document? Shitty literate programming? Embed an nREPL
+interactive Markdown document? Shitty literate programming? Embed a prepl
 server into your application and create an interactive Markdown document
 to annotate some aspect of it?
 

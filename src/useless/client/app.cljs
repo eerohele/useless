@@ -1,18 +1,20 @@
 (ns useless.client.app
   (:require [clojure.string :as string]
+            [fipp.edn :as fipp]
             [reagent.core :as reagent]
             [re-frame.core :as re-frame]
             [useless.client.editor :as editor]
-            [useless.client.epoch]))
+            [useless.client.epoch]
+            [useless.client.websocket :as websocket]))
 
 
 (defonce websocket-health-check
   (js/setInterval #(re-frame/dispatch [:websocket/update-connection-status]) 1000))
 
 
-(defn- default-nrepl-port
+(defn- default-prepl-port
   []
-  (.getAttribute (.querySelector js/document "meta[name = 'default-nrepl-port']") "content"))
+  (.getAttribute (.querySelector js/document "meta[name = 'default-prepl-port']") "content"))
 
 
 (defn <Port>
@@ -46,22 +48,22 @@
         "Disconnected.")]]))
 
 
+(defn <Result>
+  [{:keys [ns val tag exception] :as result}]
+  [:li
+   [:pre.evaluation-result
+    [:code
+     [:span.ns ns]
+     (when (contains? result :val)
+       [:span {:class (cond exception :err (= tag :out) :out :else :value)}
+        (with-out-str (fipp/pprint val))])]]])
+
+
 (defn <Results>
   []
   [:<>
-   [:ul
-    (for [{:keys [id ns out value err]} @(re-frame/subscribe [:editor/results])]
-      ^{:key id}
-      [:li
-       [:pre.evaluation-result
-        [:code
-         (when out
-           [:span.out out])
-         [:span.ns ns]
-         (when value
-           [:span.value (last value)])
-         (when err
-           [:span.err err])]]])]
+   (into [:ul]
+         (map <Result> @(re-frame/subscribe [:editor/results])))
    [:button
     {:on-click #(re-frame/dispatch [:editor/clear-results])}
     "✕"]])
@@ -93,6 +95,7 @@
 
 (defn ^:dev/before-load stop!
   []
+  (websocket/close!)
   (js/clearInterval websocket-health-check)
   (run! #(reagent/unmount-component-at-node (.. % -parentNode -parentNode)) (code-blocks))
   (reagent/unmount-component-at-node header)
@@ -101,7 +104,7 @@
 
 (defn ^:dev/after-load start!
   []
-  (re-frame/dispatch-sync [:app-db/initialize {:nrepl/port (default-nrepl-port)}])
+  (re-frame/dispatch-sync [:app-db/initialize {:prepl/port (default-prepl-port)}])
 
   (run!
     (fn [node]

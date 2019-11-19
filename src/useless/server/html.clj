@@ -33,8 +33,8 @@
 
 
 (defn render
-  [nrepl-port input-string]
+  [prepl-port input-string]
   (util/without-escaping
     (parser/render-file "html/document.html"
-                        {:nrepl-port nrepl-port
+                        {:prepl-port prepl-port
                          :content    (markdown->html-string input-string)})))
