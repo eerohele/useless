@@ -14,7 +14,7 @@ You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_sta
 1. Run:
 
     ```bash
-    clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "6a478903d58461819d74e5a32bc7e820afb1a610"}}}' \
+    clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "db4812677b75fd0f924dd6382c874ede57bbd22c"}}}' \
         -m useless.cli \
         --uri https://gist.github.com/eerohele/61d6e2d031284032a383d444da4792dd
     ```
