@@ -25,9 +25,11 @@ body {
 }
 
 main {
+    box-sizing: border-box;
+    height: 100vh;
     margin-top: 3em;
-    max-width: 49%;
-    overflow-y: scroll;
+    max-width: 50%;
+    overflow-y: auto;
 }
 
 h1, h2 {
@@ -123,17 +125,17 @@ header .connection-status.disconnected {
 aside {
     background: var(--color-background);
     border-left: 5px solid var(--color-codeblock-border);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column-reverse;
     height: 100vh;
     opacity: .9;
-    overflow-y: scroll;
+    overflow-y: auto;
     position: fixed;
     resize: vertical;
     right: 0;
     top: var(--header-height);
     width: 50%;
-    z-index: 4;
 }
 
 aside ul {
