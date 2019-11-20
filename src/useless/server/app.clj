@@ -1,11 +1,12 @@
 (ns useless.server.app
   (:require [clojure.java.io :as io]
+            [clojure.tools.logging :as log]
             [integrant.core :as ig]
             [unilog.config :as unilog]
             [useless.server.handler :as handler]
             [useless.server.http :as http]
-            [useless.server.prepl :as prepl]
-            [clojure.tools.logging :as log]))
+            [useless.server.prepl :as prepl]))
+
 
 (unilog/start-logging! {:appenders [{:appender :console
                                      :encoder  :json}]
@@ -21,7 +22,6 @@
   (reify Thread$UncaughtExceptionHandler
     (uncaughtException [_ thread ex]
       (log/error ex "Uncaught exception on" (.getName thread)))))
-
 
 
 (def default-config
