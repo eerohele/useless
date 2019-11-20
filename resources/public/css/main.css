@@ -26,7 +26,8 @@ body {
 
 main {
     margin-top: 3em;
-    max-width: 42em;
+    max-width: 49%;
+    overflow-y: scroll;
 }
 
 h1, h2 {
@@ -126,7 +127,7 @@ aside {
     flex-direction: column-reverse;
     height: 100vh;
     opacity: .9;
-    overflow: auto;
+    overflow-y: scroll;
     position: fixed;
     resize: vertical;
     right: 0;
