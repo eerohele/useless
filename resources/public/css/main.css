@@ -22,6 +22,7 @@ body {
     font-family: var(--font-family-sans-serif);
     font-size: 100%;
     margin: 0 1rem;
+    overflow-y: hidden;
 }
 
 main {
@@ -126,11 +127,8 @@ aside {
     background: var(--color-background);
     border-left: 5px solid var(--color-codeblock-border);
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column-reverse;
     height: 100vh;
     opacity: .9;
-    overflow-y: auto;
     position: fixed;
     resize: vertical;
     right: 0;
@@ -138,9 +136,16 @@ aside {
     width: 50%;
 }
 
+aside > div {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100vh;
+}
+
 aside ul {
     list-style-type: none;
     margin: 0 0 calc(var(--header-height) + 10px) 0;
+    overflow-y: auto;
     padding: 0;
 }
 
@@ -193,6 +198,9 @@ aside button:hover {
     font: 0.9rem/1.5 var(--font-family-monospace);
     height: auto;
     margin-bottom: 1rem;
+
+    /* Fix hidden cursor at first column */
+    padding-left: 1px;
 }
 
 .cm-s-dracula .CodeMirror-matchingbracket {

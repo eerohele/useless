@@ -59,11 +59,23 @@
         (with-out-str (fipp/pprint val))])]]])
 
 
+(defn <ResultList>
+  []
+  (reagent/create-class
+    {:component-did-update
+     #(let [el (reagent/dom-node %)]
+       (set! (.-scrollTop el) (- (.-scrollHeight el) (.-clientHeight el))))
+
+     :render
+     (fn [_]
+       (into [:ul]
+             (map <Result> @(re-frame/subscribe [:editor/results]))))}))
+
+
 (defn <Results>
   []
-  [:<>
-   (into [:ul]
-         (map <Result> @(re-frame/subscribe [:editor/results])))
+  [:div
+   [<ResultList>]
    [:button
     {:on-click #(re-frame/dispatch [:editor/clear-results])}
     "✕"]])
