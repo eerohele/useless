@@ -25,7 +25,8 @@
            com.vladsch.flexmark/flexmark                         {:mvn/version "0.50.44"}
            com.vladsch.flexmark/flexmark-ext-tables              {:mvn/version "0.50.44"}
            com.vladsch.flexmark/flexmark-ext-gfm-tasklist        {:mvn/version "0.50.44"}
-           com.vladsch.flexmark/flexmark-ext-jekyll-front-matter {:mvn/version "0.50.44"}}
+           com.vladsch.flexmark/flexmark-ext-jekyll-front-matter {:mvn/version "0.50.44"}
+           org.asciidoctor/asciidoctorj                          {:mvn/version "2.1.0"}}
 
  :aliases {:dev      {:extra-paths ["dev" "target/cljs"]
                       :extra-deps  {org.clojure/test.check {:mvn/version "0.10.0"}

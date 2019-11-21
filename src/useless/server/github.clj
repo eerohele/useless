@@ -1,7 +1,8 @@
 (ns useless.server.github
   (:require [clojure.data.json :as json]
             [byte-streams :as bytes]
-            [useless.server.response :as response])
+            [useless.server.response :as response]
+            [useless.server.util :refer [guess-file-type]])
   (:import (java.util Base64)))
 
 
@@ -21,14 +22,16 @@
 
 
 (defn- parse-gist
-  [response]
-  (-> response
-      (json/read-str :key-fn keyword)
-      :files
-      vals
-      (as-> $ (filter (comp #{"text/markdown"} :type) $))
-      first
-      :content))
+  [ response]
+  (let [{:keys [filename content]}
+        (-> response
+            (json/read-str :key-fn keyword)
+            :files
+            vals
+            (as-> $ (filter (comp #{"Markdown" "AsciiDoc"} :language) $))
+            first)]
+    {:type    (guess-file-type filename)
+     :content content}))
 
 
 (def ^:private base64-decoder
@@ -36,11 +39,10 @@
 
 
 (defn- parse-file
-  [file]
-  (->> (json/read-str file :key-fn keyword)
-       :content
-       (.decode base64-decoder)
-       (bytes/to-string)))
+  [response]
+  (let [{filename :name content :content} (json/read-str response :key-fn keyword)]
+    {:type    (guess-file-type filename)
+     :content (->> content (.decode base64-decoder) bytes/to-string)}))
 
 
 (defn gist

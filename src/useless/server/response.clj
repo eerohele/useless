@@ -2,6 +2,7 @@
   (:require [clojure.core.cache.wrapped :as cache]
             [aleph.http :as http]
             [byte-streams :as bytes]
+            [manifold.deferred :as deferred]
             [useless.server.html :as html]))
 
 
@@ -11,9 +12,9 @@
 
 (defn- read-body
   [uri]
-  (-> @(http/get uri {:headers {"User-Agent" "aleph"}})
-      :body
-      bytes/to-string))
+  @(deferred/chain (http/get uri {:headers {"User-Agent" "aleph"}})
+                   :body
+                   bytes/to-string))
 
 
 (defn ok

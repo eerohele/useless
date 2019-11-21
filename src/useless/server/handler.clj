@@ -10,7 +10,8 @@
             [ring.util.response :refer [redirect]]
             [useless.server.html :as html]
             [useless.server.github :as github]
-            [useless.server.response :as response])
+            [useless.server.response :as response]
+            [useless.server.util :refer [guess-file-type]])
   (:import (java.io FileNotFoundException)))
 
 
@@ -18,7 +19,8 @@
   [port {{path :path} :path-params}]
   (try
     {:status  200
-     :body    (html/render port (slurp path))
+     :body    (html/render port {:type    (guess-file-type path)
+                                 :content (slurp path)})
      :headers {"Content-Type" "text/html"}}
     (catch FileNotFoundException _
       {:status 404})))
@@ -28,7 +30,8 @@
   [port {{path :path} :path-params}]
   (if-some [path (io/resource path)]
     {:status  200
-     :body    (html/render port (slurp path))
+     :body    (html/render port {:type    (guess-file-type path)
+                                 :content (slurp path)})
      :headers {"Content-Type" "text/html"}}
     {:status 404}))
 

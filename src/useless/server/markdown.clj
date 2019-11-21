@@ -1,4 +1,5 @@
 (ns useless.server.markdown
+  (:require [useless.server.renderer :as renderer])
   (:import (java.util ArrayList)
            (com.vladsch.flexmark.parser Parser)
            (com.vladsch.flexmark.html HtmlRenderer)
@@ -25,6 +26,14 @@
   (.build (HtmlRenderer/builder options)))
 
 
-(defn render
-  [input-string]
-  (->> input-string (.parse parser) (.render renderer)))
+(derive :type/md :type/markdown)
+
+
+(defmethod renderer/render :type/markdown
+  [{:keys [content]}]
+  (->> content (.parse parser) (.render renderer)))
+
+
+(comment
+  (renderer/render {:type    :type/markdown
+                    :content "# Foo"}))
