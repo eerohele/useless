@@ -16,7 +16,7 @@ You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_sta
     ```bash
     clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "9dcfc9d425d86bd6dad08355ab7ffba7784cea2b"}}}' \
         -m useless.cli \
-        --uri https://gist.github.com/eerohele/61d6e2d031284032a383d444da4792dd
+        --uri https://gist.github.com/eerohele/ac9a4d99a82128c2aeff25496fed4be9
     ```
 
 1. Start evaluating forms with <kbd>Cmd</kbd> + <kbd>Enter</kbd> (macOS) or <kbd>Ctrl</kbd> + <kbd>Enter</kbd> (Windows).
