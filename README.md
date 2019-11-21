@@ -39,7 +39,7 @@ clj -A:useless --uri https://gist.github.com/eerohele/61d6e2d031284032a383d444da
    
 ## Sources
 
-Useless can handle Markdown documents from one of these sources:
+Useless can handle Markdown and AsciiDoc documents from one of these sources:
 
 | Source | URI |
 |------|-------|
@@ -47,7 +47,7 @@ Useless can handle Markdown documents from one of these sources:
 | Classpath | [http://localhost:1234/classpath/vendor/example.markdown](http://localhost:1234/classpath/vendor/example.markdown) |
 | Gist | [http://localhost:1234/gist/e1dca953548bfdfb9844](http://localhost:1234/gist/e1dca953548bfdfb9844) |
 | GitHub README | [http://localhost:1234/github/readme/ztellman/manifold](http://localhost:1234/github/readme/ztellman/manifold) |
-| GitHub file | [http://localhost:1234/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown](http://localhost:1234/github/file/adambard/learnxinyminutes-docs/clojure.html.markdown) |
+| GitHub file | [https://github.com/clojure/clojure-site/blob/master/content/guides/learn/functions.adoc](http://[::1]:1234/github/file/clojure/clojure-site/content/guides/learn/functions.adoc) |
 
 ## Evaluating forms
 
