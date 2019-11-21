@@ -113,10 +113,6 @@
                       (.flush writer)
                       (recur)))
 
-                  ;; Set default print length to 32 to prevent infinite lazy
-                  ;; seqs from killing the server.
-                  (async/>!! in-chan (pr-str '(set! *print-length* 32)))
-
                   ;; Feed every message received from prepl to WebSocket stream.
                   (stream/connect out-chan websocket)
 
