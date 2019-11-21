@@ -71,7 +71,9 @@
     (fn [system]
       (let [num 1000]
         @(d/let-flow [websocket (websocket-connection system)]
-           (letfn [(put-test-val! #(deref (stream/put! websocket (format "(do (Thread/sleep 50) (* %d %d))" % %))))]
+           (letfn [(put-test-val!
+                     [x]
+                     (deref (stream/put! websocket (format "(do (Thread/sleep 50) (* %d %d))" x x))))]
              (doall
                (pmap put-test-val! (range num))))
 
