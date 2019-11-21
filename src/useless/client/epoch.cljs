@@ -1,6 +1,5 @@
 (ns useless.client.epoch
-  (:require [cljs.core.async :as async :include-macros true]
-            [re-frame.core :as re-frame]
+  (:require [re-frame.core :as re-frame]
             [useless.client.websocket :as websocket]))
 
 
