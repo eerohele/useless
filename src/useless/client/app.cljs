@@ -48,15 +48,29 @@
         "Disconnected.")]]))
 
 
+(defmulti render-result :tag)
+
+
+(defmethod render-result :ret
+  [{:keys [val exception]}]
+  [:span {:class (cond exception :err :else :value)}
+   (with-out-str (fipp/pprint val))])
+
+
+(defmethod render-result :out
+  [{:keys [val]}]
+  [:span.out
+   (string/trim (with-out-str (println val)))])
+
+
 (defn <Result>
-  [{:keys [ns val tag exception] :as result}]
+  [{:keys [ns] :as result}]
   [:li
    [:pre.evaluation-result
     [:code
      [:span.ns ns]
      (when (contains? result :val)
-       [:span {:class (cond exception :err (= tag :out) :out :else :value)}
-        (with-out-str (fipp/pprint val))])]]])
+       (render-result result))]]])
 
 
 (defn <ResultList>
