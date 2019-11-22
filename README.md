@@ -1,8 +1,6 @@
 Useless
 =======
 
-**I'm still working on this. Things might change drastically.** Feel free to give it a try, but everything remains subject to change at this point.
-
 Make the Clojure code blocks in Markdown & AsciiDoc documents interactive.
 
 ![Screenshot of Useless](https://gist.githubusercontent.com/eerohele/b4c84928cc9cdb664cb97b39eaf14688/raw/b7ce2a2ead53c903e14f847cdc0439ea0c7b97cb/useless.png)
