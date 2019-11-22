@@ -22,7 +22,6 @@ body {
     font-family: var(--font-family-sans-serif);
     font-size: 100%;
     margin: 0 1rem;
-    overflow-y: hidden;
 }
 
 main {
