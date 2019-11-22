@@ -30,7 +30,7 @@
   [port {{path :path} :path-params}]
   (if-some [path (io/resource path)]
     {:status  200
-     :body    (html/render port {:type    (guess-file-type path)
+     :body    (html/render port {:type    (guess-file-type (str path))
                                  :content (slurp path)})
      :headers {"Content-Type" "text/html"}}
     {:status 404}))
