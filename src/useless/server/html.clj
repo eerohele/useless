@@ -1,7 +1,9 @@
 (ns useless.server.html
   (:require [selmer.parser :as parser]
             [selmer.util :as util]
-            [useless.server.renderer :as renderer]))
+            [useless.server.renderer :as renderer]
+            [useless.server.markdown]
+            [useless.server.asciidoc]))
 
 
 (defn render

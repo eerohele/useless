@@ -55,5 +55,6 @@
   (def system (start! {:uri (java.net.URI. "https://github.com/anan44/it-starts-with-clojure/blob/master/materials/4-state-in-clojure/2-storing-state-with-atom.md")}))
   (def system (start! {:uri (java.net.URI. "https://raw.githubusercontent.com/anan44/it-starts-with-clojure/master/materials/4-state-in-clojure/1-adding-to-data-structures.md")}))
   (def system (start! {:uri (java.net.URI. "https://github.com/noprompt/meander/blob/epsilon/doc/pattern-matching.md")}))
+  (def system (start! {:uri (java.net.URI. "https://github.com/clojure/clojure-site/blob/master/content/guides/learn/functions.adoc")}))
   (stop! system)
   )
