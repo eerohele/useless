@@ -128,6 +128,11 @@ time. I haven't made any sort of attempt to make Useless secure in any
 particular way, except to prevent it from listening on all IP addresses
 (0.0.0.0).
 
+In the same vein, remember that with Useless, you're always running code on
+your own computer. In other words, just like with any Clojure REPL, if you run
+something like `(clojure.java.shell/sh "rm" "-rf")`, you're again going to have
+a bad time.
+
 ## Why?
 
 I don't know. You tell me. Tutorials? Interactive documentation? Onboarding a
