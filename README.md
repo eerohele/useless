@@ -9,6 +9,9 @@ Make the Clojure code blocks in Markdown & AsciiDoc documents interactive.
 
 You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_started#_clojure_installer_and_cli_tools) installed.
 
+**Warning**: Just like with a regular REPL, whatever piece of code you evaluate is executed on your own computer.
+In other words, maybe don't eval things like `(clojure.java.shell/sh "rm" "-rf")`.
+
 1. Run:
 
     ```bash
@@ -127,11 +130,6 @@ Nope. If you expose Useless to the public internet, you're going to have bad
 time. I haven't made any sort of attempt to make Useless secure in any
 particular way, except to prevent it from listening on all IP addresses
 (0.0.0.0).
-
-In the same vein, remember that with Useless, you're always running code on
-your own computer. In other words, just like with any Clojure REPL, if you run
-something like `(clojure.java.shell/sh "rm" "-rf")`, you're again going to have
-a bad time.
 
 ## Why?
 
