@@ -104,7 +104,7 @@ in your `~/.clojure/deps.edn`:
 :prepl {:jvm-opts ["-Dclojure.server.repl={:port,31337,:accept,clojure.core.server/io-prepl}"]}
 ```
 
-Then, to run a prepl server that can use `parallel`, run:
+Then, to start a prepl server that can use `parallel`, run:
 
 ```bash
 clj -O:prepl -Sdeps '{:deps {parallel {:mvn/version "RELEASE"}}}'
