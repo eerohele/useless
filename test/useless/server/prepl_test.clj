@@ -45,13 +45,13 @@
   (with-test-system [::http/server ::prepl/handler]
     (fn [system]
       @(d/let-flow [websocket (websocket-connection system)]
-         (stream/put! websocket "(+ 1 2)")
+         (stream/put! websocket "{:val \"(+ 1 2)\"}")
 
          (is (match (take-val! websocket)
                     {:tag :ret :val 3 :ns "user" :form "(+ 1 2)" :ms _} true
                     :else false))
 
-         (stream/put! websocket "(throw (ex-info \"Boom!\" {}))")
+         (stream/put! websocket "{:val \"(throw (ex-info \\\"Boom!\\\" {})) \"}")
 
          (is (match (take-val! websocket)
                     {:exception true
@@ -65,7 +65,7 @@
                                  :via   _}} true
                     :else false))
 
-         (stream/put! websocket "+")
+         (stream/put! websocket "{:val \"+\"}")
 
          (let [{:keys [val] :as message} (take-val! websocket)]
            (is (tagged-literal? val))
@@ -85,7 +85,7 @@
         @(d/let-flow [websocket (websocket-connection system)]
            (letfn [(put-test-val!
                      [x]
-                     (deref (stream/put! websocket (format "(do (Thread/sleep 50) (* %d %d))" x x))))]
+                     (deref (stream/put! websocket (format "{:val (do (Thread/sleep 50) (* %d %d))}" x x))))]
              (doall
                (pmap put-test-val! (range num))))
 

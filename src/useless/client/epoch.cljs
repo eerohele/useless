@@ -54,7 +54,7 @@
 (re-frame/reg-fx
   :websocket/evaluate
   (fn [message]
-    (websocket/send message)))
+    (websocket/send {:val message})))
 
 
 (re-frame/reg-event-fx

@@ -1,6 +1,7 @@
 (ns useless.server.prepl
   (:require [clojure.core.async :as async]
             [clojure.core.server :as server]
+            [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [aleph.http :as http]
@@ -52,7 +53,7 @@
 
         (let [writer (PipedWriter.)
               reader (PipedReader. writer)
-              in-chan (async/chan 32)
+              in-chan (async/chan 32 (map #(edn/read-string {:default tagged-literal} %)))
               out-chan (async/chan 32 (map pr-str))]
 
           ;; Kick off an infinite REPL loop in another thread.
@@ -108,8 +109,8 @@
                   ;; the usual suspect.
                   (async/go-loop
                     []
-                    (when-let [input (async/<! in-chan)]
-                      (.write writer (str input \newline))
+                    (when-let [{:keys [val]} (async/<! in-chan)]
+                      (.write writer (str val \newline))
                       (.flush writer)
                       (recur)))
 
