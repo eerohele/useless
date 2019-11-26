@@ -22,6 +22,10 @@ In other words, maybe don't eval things like `(clojure.java.shell/sh "rm" "-rf" 
 
 1. Start evaluating forms with <kbd>Cmd</kbd> + <kbd>Enter</kbd> (macOS) or <kbd>Ctrl</kbd> + <kbd>Enter</kbd> (Windows).
 
+## Status
+
+Early stages, gauging interest.
+
 ## Alias
 
 To make launching Useless easier, you can add an alias like this in your `~/.clojure/deps.edn`:
