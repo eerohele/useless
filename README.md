@@ -15,7 +15,7 @@ In other words, maybe don't eval things like `(clojure.java.shell/sh "rm" "-rf" 
 1. Run:
 
     ```bash
-    clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "8bbbe6297dbe0fab88ada2db9a7f22b48c5d806d"}}}' \
+    clj -Sdeps '{:deps {me.flowthing/useless {:git/url "http://github.com/eerohele/useless" :sha "84c2bfea85207da780fb337cee31724c135c7cec"}}}' \
         -m useless.cli \
         --uri https://gist.github.com/eerohele/ac9a4d99a82128c2aeff25496fed4be9
     ```
