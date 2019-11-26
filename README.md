@@ -10,7 +10,7 @@ Make the Clojure code blocks in Markdown & AsciiDoc documents interactive.
 You must have the [Clojure CLI tools](https://www.clojure.org/guides/getting_started#_clojure_installer_and_cli_tools) installed.
 
 **Warning**: Just like with a regular REPL, whatever piece of code you evaluate is executed on your own computer.
-In other words, maybe don't eval things like `(clojure.java.shell/sh "rm" "-rf")`.
+In other words, maybe don't eval things like `(clojure.java.shell/sh "rm" "-rf" "/")`.
 
 1. Run:
 
