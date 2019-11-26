@@ -109,7 +109,7 @@
                   (async/go-loop
                     []
                     (when-let [input (async/<! in-chan)]
-                      (.write writer input)
+                      (.write writer (str input \newline))
                       (.flush writer)
                       (recur)))
 
@@ -154,7 +154,11 @@
     (stream/consume-async #(deferred/future (write %)) input-stream)
     )
 
-  (pmap #(stream/put! input-stream (format "DR(do (Thread/sleep 50) (* %d %d))" % %))
+  (stream/put! input-stream "+")
+  (stream/put! input-stream "+\n")
+  (stream/put! input-stream "(+ 1 2)")
+
+  (pmap #(stream/put! input-stream (format "(do (Thread/sleep 50) (* %d %d))" % %))
         (range 1000))
 
   (.close reader)

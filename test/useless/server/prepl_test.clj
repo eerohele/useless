@@ -31,7 +31,7 @@
 
 (defn- take-val!
   [stream]
-  (-> stream stream/take! deref edn/read-string))
+  (edn/read-string {:default tagged-literal} @(stream/take! stream)))
 
 
 (defn- websocket-connection
@@ -63,7 +63,19 @@
                                  :phase :execution
                                  :trace _
                                  :via   _}} true
-                    :else false))))))
+                    :else false))
+
+         (stream/put! websocket "+")
+
+         (let [{:keys [val] :as message} (take-val! websocket)]
+           (is (tagged-literal? val))
+
+           (is (match message {:form "+"
+                               :ms   _
+                               :ns   "user"
+                               :tag  :ret
+                               :val  _} true
+                      :else false)))))))
 
 
 (deftest ^:stateful ^:slow stress-test
