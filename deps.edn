@@ -18,7 +18,7 @@
            fipp                                                  {:mvn/version "0.6.21"}
            ring/ring-core                                        {:mvn/version "1.8.0"}
            ring/ring-defaults                                    {:mvn/version "0.3.2"}
-           selmer                                                {:mvn/version "1.12.17"}
+           hiccup                                                {:mvn/version "2.0.0-alpha2"}
            re-frame                                              {:mvn/version "0.11.0-rc1"}
            bk/ring-gzip                                          {:mvn/version "0.3.0"}
            spootnik/unilog                                       {:mvn/version "0.7.25"}
