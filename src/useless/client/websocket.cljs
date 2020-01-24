@@ -9,13 +9,13 @@
 
 
 (defn endpoint
-  [port]
-  (str "ws://" (.-host (.-location js/window)) "/repl?port=" port))
+  []
+  (str "ws://" (.-host (.-location js/window)) "/repl"))
 
 
 (defn connect
-  [port]
-  (client/connect (endpoint port) {:chan (async/chan 32)}))
+  []
+  (client/connect (endpoint) {:chan (async/chan 32)}))
 
 
 (defn close!
@@ -35,16 +35,29 @@
       (async/>! sink message))))
 
 
+(defmulti handle :id)
+
+
+(defmethod handle :handshake
+  [{{port :prepl-port} :data}]
+  (re-frame/dispatch [:port/set port]))
+
+
+(defmethod handle :prepl-response
+  [{response :data}]
+  (re-frame/dispatch [:editor/add-result response]))
+
+
 (defn switch!
-  [port]
+  []
   (async/go
     (when @!stream (client/close @!stream))
-    (let [{:keys [source] :as conn} (async/<! (connect port))]
+    (let [{:keys [source] :as conn} (async/<! (connect))]
       (reset! !stream conn)
 
       (async/go-loop
         []
         (when-some [message (async/<! source)]
           (.debug js/console {:event :message/<-server :message message})
-          (re-frame/dispatch [:editor/add-result (edn/read-string {:default tagged-literal} message)])
+          (handle (edn/read-string {:default tagged-literal} message))
           (recur))))))

@@ -6,12 +6,11 @@
 
 
 (defn render
-  [prepl-port document]
+  [document]
   (let [content (renderer/render document)]
     (page/html5
       [:head
        [:meta {:charset "utf-8"}]
-       [:meta {:name "default-prepl-port" :content prepl-port}]
        [:title "Useless"]
        [:link {:rel "stylesheet" :href "/assets/css/vendor/codemirror.min.css"}]
        [:link {:rel "stylesheet" :href "/assets/css/vendor/dracula.min.css"}]

@@ -46,15 +46,15 @@
 
 
 (defn gist
-  [port {{id :id} :path-params}]
-  (response/ok port parse-gist (gist-uri id)))
+  [{{id :id} :path-params}]
+  (response/ok parse-gist (gist-uri id)))
 
 
 (defn readme
-  [port {{:keys [owner repo]} :path-params}]
-  (response/ok port parse-file (readme-uri owner repo)))
+  [{{:keys [owner repo]} :path-params}]
+  (response/ok parse-file (readme-uri owner repo)))
 
 
 (defn file
-  [port {{:keys [owner repo path]} :path-params}]
-  (response/ok port parse-file (file-uri owner repo path)))
+  [{{:keys [owner repo path]} :path-params}]
+  (response/ok parse-file (file-uri owner repo path)))

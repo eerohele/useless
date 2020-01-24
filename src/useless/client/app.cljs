@@ -12,14 +12,9 @@
   (js/setInterval #(re-frame/dispatch [:websocket/update-connection-status]) 1000))
 
 
-(defn- default-prepl-port
-  []
-  (.getAttribute (.querySelector js/document "meta[name = 'default-prepl-port']") "content"))
-
-
 (defn <Port>
   []
-  (let [port @(re-frame/subscribe [:port/get])]
+  (when-let [port @(re-frame/subscribe [:port/get])]
     [:div.port
      [:p.label "Port: "]
      (if @(re-frame/subscribe [:port/editing?])
@@ -78,7 +73,7 @@
   (reagent/create-class
     {:component-did-update
      #(let [el (reagent/dom-node %)]
-       (set! (.-scrollTop el) (- (.-scrollHeight el) (.-clientHeight el))))
+        (set! (.-scrollTop el) (- (.-scrollHeight el) (.-clientHeight el))))
 
      :render
      (fn [_]
@@ -130,7 +125,7 @@
 
 (defn ^:dev/after-load start!
   []
-  (re-frame/dispatch-sync [:app-db/initialize {:prepl/port (default-prepl-port)}])
+  (re-frame/dispatch-sync [:app-db/initialize])
 
   (run!
     (fn [node]

@@ -16,22 +16,22 @@
 
 
 (defn file
-  [port {{path :path} :path-params}]
+  [{{path :path} :path-params}]
   (try
     {:status  200
-     :body    (html/render port {:type    (guess-file-type path)
-                                 :content (slurp path)})
+     :body    (html/render {:type    (guess-file-type path)
+                            :content (slurp path)})
      :headers {"Content-Type" "text/html"}}
     (catch FileNotFoundException _
       {:status 404})))
 
 
 (defn resource
-  [port {{path :path} :path-params}]
+  [{{path :path} :path-params}]
   (if-some [path (io/resource path)]
     {:status  200
-     :body    (html/render port {:type    (guess-file-type (str path))
-                                 :content (slurp path)})
+     :body    (html/render {:type    (guess-file-type (str path))
+                            :content (slurp path)})
      :headers {"Content-Type" "text/html"}}
     {:status 404}))
 
@@ -64,7 +64,7 @@
 
 
 (defmethod ig/init-key ::app
-  [_ {uri :uri prepl-handler :handler/prepl {port :port} :prepl/server}]
+  [_ {uri :uri prepl-handler :handler/prepl}]
   (ring/ring-handler
     (ring/router
       [["/"
@@ -77,22 +77,22 @@
                             [wrap-keyword-params]]}}]
        ["/uri"
         {:get {:handler    (fn [{{query-uri :uri} :query-params}]
-                             (response/ok port identity (or query-uri uri)))
+                             (response/ok identity (or query-uri uri)))
                :middleware [[wrap-defaults site-defaults]]}}]
        ["/gist/:id"
-        {:get        {:handler (partial github/gist port)}
+        {:get        {:handler github/gist}
          :middleware [[wrap-defaults site-defaults]]}]
        ["/github/readme/:owner/:repo"
-        {:get        {:handler (partial github/readme port)}
+        {:get        {:handler github/readme}
          :middleware [[wrap-defaults site-defaults]]}]
        ["/github/file/:owner/:repo/{*path}"
-        {:get        {:handler (partial github/file port)}
+        {:get        {:handler github/file}
          :middleware [[wrap-defaults site-defaults]]}]
        ["/file/{*path}"
-        {:get        {:handler (partial file port)}
+        {:get        {:handler file}
          :middleware [[wrap-defaults site-defaults]]}]
        ["/classpath/{*path}"
-        {:get        {:handler (partial resource port)}
+        {:get        {:handler resource}
          :middleware [[wrap-defaults site-defaults]]}]
        ["/assets/*" (ring/create-resource-handler)]])
     (ring/create-default-handler)

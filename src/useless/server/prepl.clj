@@ -9,25 +9,8 @@
             [manifold.deferred :as deferred]
             [manifold.stream :as stream])
   (:import (java.net InetAddress)
-           (java.io PipedReader PipedWriter)))
-
-
-(defmethod ig/init-key ::server
-  [_ {:keys [bind port provided? server-name] :or {server-name "jvm"} :as options}]
-  (if (#{"0.0.0.0" "::" "0:0:0:0:0:0:0:0" "[::0]"} bind)
-    (throw (ex-info "You do NOT want to bind the pREPL server to all network interfaces." options))
-    (let [server (server/start-server {:accept 'clojure.core.server/io-prepl
-                                       :port   0
-                                       :name   server-name})]
-      {:server server
-       :port   (if provided?
-                 port
-                 (.getLocalPort server))})))
-
-
-(defmethod ig/halt-key! ::server
-  [_ {:keys [server-name]}]
-  (server/stop-server server-name))
+           (java.io PipedReader PipedWriter)
+           (java.util UUID)))
 
 
 (defn- origin-host
@@ -40,13 +23,38 @@
         (.getHostAddress))))
 
 
+(defn- start-server
+  [name]
+  (let [server (server/start-server {:accept 'clojure.core.server/io-prepl
+                                     :port   0
+                                     :name   name})]
+    {:server server
+     :port   (.getLocalPort server)}))
+
+
+(defmulti handle (fn [_ {id :id}] id))
+
+
+(defmethod handle :eval
+  [writer {:keys [data]}]
+  (.write writer (str data \newline))
+  (.flush writer))
+
+
+(defmethod handle :default
+  [_ message]
+  (log/log :error {:event   :websocket/unknown-message
+                   :message message}))
+
+
 (defmethod ig/init-key ::handler
   [_ _]
-  (fn [{{port :port} :params remote-addr :remote-addr :as request}]
+  (fn [{remote-addr :remote-addr :as request}]
     ;; Only allow WebSocket connections that originate from the loopback
     ;; interface.
     (if (#{"127.0.0.1" "0:0:0:0:0:0:0:1"} (origin-host request))
-      (do
+      (let [server-name (str (UUID/randomUUID))
+            {:keys [port]} (start-server server-name)]
         (log/log :info {:event       :websocket/connect
                         :remote-addr remote-addr
                         :port        port})
@@ -58,7 +66,7 @@
 
           ;; Kick off an infinite REPL loop in another thread.
           (-> (deferred/future
-                (let [out-fn #(async/>!! out-chan %)]
+                (let [out-fn #(async/go (async/>! out-chan {:id :prepl-response :data %}))]
                   (server/remote-prepl "localhost" port reader out-fn
                                        :valf #(binding [*default-data-reader-fn* tagged-literal]
                                                 (read-string %)))))
@@ -85,13 +93,17 @@
                 (fn [_] (http/websocket-connection request))
 
                 (fn [websocket]
-                  ;; Close pipe when client closes WebSocket connection.
+                  ;; Close pipe and prepl server when client closes WebSocket
+                  ;; connection.
                   (stream/on-closed
                     websocket
                     (fn []
                       (log/log :info {:event       :websocket/disconnect
                                       :remote-addr remote-addr})
-                      (.close reader)))
+                      (.close reader)
+                      (when (server/stop-server server-name)
+                        (log/log :info {:event       :prepl-server/stopped
+                                        :remote-addr remote-addr}))))
 
                   ;; Proxy every received WebSocket message into a core.async
                   ;; channel that we can use in a go-loop.
@@ -109,13 +121,17 @@
                   ;; the usual suspect.
                   (async/go-loop
                     []
-                    (when-let [{:keys [val]} (async/<! in-chan)]
-                      (.write writer (str val \newline))
-                      (.flush writer)
+                    (when-let [message (async/<! in-chan)]
+                      (handle writer message)
                       (recur)))
 
                   ;; Feed every message received from prepl to WebSocket stream.
                   (stream/connect out-chan websocket)
+
+                  ;; Send initial data to WebSocket client.
+                  (async/go
+                    (async/>! out-chan {:id   :handshake
+                                        :data {:prepl-port port}}))
 
                   (log/log :info {:event       :websocket/connection-established
                                   :remote-addr remote-addr
@@ -128,6 +144,7 @@
                                    :exception (Throwable->map throwable)
                                    :port      port})
                   (.close reader)
+                  (server/stop-server server-name)
                   {:status 400})))))
       {:status 403})))
 

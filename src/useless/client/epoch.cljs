@@ -6,7 +6,9 @@
 (re-frame/reg-event-db
   :port/set
   (fn [db [_ port]]
-    (cond-> db (not (empty? port)) (assoc :prepl/port (js/parseInt port)))))
+    (cond-> db
+            (some? port)
+            (assoc :prepl/port (if (int? port) port (js/parseInt port))))))
 
 
 (re-frame/reg-sub
@@ -54,7 +56,7 @@
 (re-frame/reg-fx
   :websocket/evaluate
   (fn [message]
-    (websocket/send {:val message})))
+    (websocket/send {:id :eval :data message})))
 
 
 (re-frame/reg-event-fx
@@ -91,4 +93,5 @@
   :app-db/initialize
   (fn [{db :db} [_ {:keys [prepl/port] :as data}]]
     {:db               (merge db data)
+     :dispatch         [:editor/clear-results]
      :websocket/switch port}))

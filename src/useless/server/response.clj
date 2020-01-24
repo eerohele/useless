@@ -18,9 +18,9 @@
 
 
 (defn ok
-  [port parse-fn uri]
+  [parse-fn uri]
   {:status  200
    :body    (->> (cache/lookup-or-miss cache (.toString uri) read-body)
                  (parse-fn)
-                 (html/render port))
+                 (html/render))
    :headers {"Content-Type" "text/html"}})
