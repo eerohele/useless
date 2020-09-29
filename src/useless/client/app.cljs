@@ -2,6 +2,7 @@
   (:require [clojure.string :as string]
             [fipp.edn :as fipp]
             [reagent.core :as reagent]
+            [reagent.dom :as dom]
             [re-frame.core :as re-frame]
             [useless.client.editor :as editor]
             [useless.client.epoch]
@@ -72,7 +73,7 @@
   []
   (reagent/create-class
     {:component-did-update
-     #(let [el (reagent/dom-node %)]
+     #(let [el (dom/dom-node %)]
         (set! (.-scrollTop el) (- (.-scrollHeight el) (.-clientHeight el))))
 
      :render
@@ -118,9 +119,9 @@
   []
   (websocket/close!)
   (js/clearInterval websocket-health-check)
-  (run! #(reagent/unmount-component-at-node (.. % -parentNode -parentNode)) (code-blocks))
-  (reagent/unmount-component-at-node header)
-  (reagent/unmount-component-at-node aside))
+  (run! #(dom/unmount-component-at-node (.. % -parentNode -parentNode)) (code-blocks))
+  (dom/unmount-component-at-node header)
+  (dom/unmount-component-at-node aside))
 
 
 (defn ^:dev/after-load start!
@@ -129,13 +130,13 @@
 
   (run!
     (fn [node]
-      (reagent/render [editor/<CodeBlock> {:initial-value (string/trim-newline (.-textContent node))
+      (dom/render [editor/<CodeBlock> {:initial-value (string/trim-newline (.-textContent node))
                                            :mode          (mode-name node)}]
                       (.-parentNode node)))
     (code-blocks))
 
-  (reagent/render [<StatusBar>] header)
-  (reagent/render [<Results>] aside)
+  (dom/render [<StatusBar>] header)
+  (dom/render [<Results>] aside)
 
   ;; For some reason, the page tends to open up scrolled halfway down to the
   ;; middle of the page.

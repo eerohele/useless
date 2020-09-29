@@ -1,5 +1,6 @@
 (ns useless.client.editor
   (:require [reagent.core :as reagent]
+            [reagent.dom :as dom]
             [re-frame.core :as re-frame]
             ["codemirror" :as CodeMirror]
             ["codemirror/mode/clojure/clojure"]
@@ -47,7 +48,7 @@
                                                :mode           mode
                                                :readOnly       read-only?
                                                :theme          "dracula"}
-                                  editor (CodeMirror. (reagent/dom-node this) options)]
+                                  editor (CodeMirror. (dom/dom-node this) options)]
                               (when-not read-only?
                                 (let [event-handler #(re-frame/dispatch [:editor/evaluate (code-string %)])]
                                   (.setOption editor "extraKeys" #js {:Cmd-Enter  event-handler
