@@ -24,9 +24,6 @@
     (client/close stream)))
 
 
-(def connected? client/connected?)
-
-
 (defn send
   [message]
   (let [{:keys [sink]} @!stream]
@@ -61,3 +58,8 @@
           (.debug js/console {:event :message/<-server :message message})
           (handle (edn/read-string {:default tagged-literal} message))
           (recur))))))
+
+
+(defn connected?
+  []
+  (and @!stream (client/connected? @!stream)))

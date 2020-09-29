@@ -9,7 +9,7 @@
 
 
 (defonce websocket-health-check
-  (js/setInterval #(re-frame/dispatch [:websocket/update-connection-status]) 1000))
+  (js/setInterval #(re-frame/dispatch [:websocket/update-connection-status (websocket/connected?)]) 1000))
 
 
 (defn <Port>

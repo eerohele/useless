@@ -42,9 +42,9 @@
 
 (re-frame/reg-event-db
   :websocket/update-connection-status
-  (fn [db _]
-    ;; FIXME: Not quite pure
-    (assoc db :websocket/connected? (and @websocket/!stream (websocket/connected? @websocket/!stream)))))
+  [re-frame/trim-v]
+  (fn [db [connected?]]
+    (assoc db :websocket/connected? connected?)))
 
 
 (re-frame/reg-sub
