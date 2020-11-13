@@ -11,31 +11,33 @@
            haslett/haslett                                       {:mvn/version "0.1.6"
                                                                   :exclusions  [org.clojurescript/clojurescript]}
            integrant/integrant                                   {:mvn/version "0.8.0"}
-           nrepl/nrepl                                           {:mvn/version "0.8.2"}
-           metosin/reitit-ring                                   {:mvn/version "0.5.6"
+           metosin/reitit-ring                                   {:mvn/version "0.5.10"
                                                                   :exclusions  [ring/ring-core]}
-           metosin/reitit-middleware                             {:mvn/version "0.5.6"}
+           metosin/reitit-middleware                             {:mvn/version "0.5.10"}
            fipp/fipp                                             {:mvn/version "0.6.23"}
-           ring/ring-core                                        {:mvn/version "1.8.1"}
+           ring/ring-core                                        {:mvn/version "1.8.2"}
            ring/ring-defaults                                    {:mvn/version "0.3.2"}
            hiccup/hiccup                                         {:mvn/version "2.0.0-alpha2"}
-           re-frame/re-frame                                     {:mvn/version "1.1.1-77-4d5e9850-SNAPSHOT"}
+           re-frame/re-frame                                     {:mvn/version "1.1.2"
+                                                                  :exclusions [cljsjs/react cljsjs/react-dom]}
            bk/ring-gzip                                          {:mvn/version "0.3.0"}
-           spootnik/unilog                                       {:mvn/version "0.7.25"}
+           spootnik/unilog                                       {:mvn/version "0.7.26"}
            com.vladsch.flexmark/flexmark                         {:mvn/version "0.62.2"}
            com.vladsch.flexmark/flexmark-ext-tables              {:mvn/version "0.62.2"}
            com.vladsch.flexmark/flexmark-ext-gfm-tasklist        {:mvn/version "0.62.2"}
            com.vladsch.flexmark/flexmark-ext-jekyll-front-matter {:mvn/version "0.62.2"}
-           org.asciidoctor/asciidoctorj                          {:mvn/version "2.4.1"}}
+           org.asciidoctor/asciidoctorj                          {:mvn/version "2.4.2"}}
 
- :aliases {:dev      {:extra-paths ["dev" "target/cljs"]
-                      :extra-deps  {org.clojure/test.check {:mvn/version "1.1.0"}
-                                    integrant/repl         {:mvn/version "0.3.2"}
-                                    binaryage/devtools     {:mvn/version "1.0.2"}
-                                    thheller/shadow-cljs   {:mvn/version "2.11.4"}}}
+ :aliases {:dev {:extra-paths ["dev"]
+                 :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
+                              integrant/repl {:mvn/version "0.3.2"}
+                              binaryage/devtools {:mvn/version "1.0.2"}
+                              nrepl/nrepl {:mvn/version "0.8.3"}
+                              cider/piggieback {:mvn/version "0.5.2"}
+                              com.bhauman/figwheel-main {:mvn/version "0.2.12"}}}
 
-           :test     {:extra-paths ["test"]
-                      :extra-deps  {org.clojure/core.match {:mvn/version "1.0.0"}}}
+           :test {:extra-paths ["test"]
+                  :extra-deps {org.clojure/core.match {:mvn/version "1.0.0"}}}
 
            :test/clj {:extra-deps {lambdaisland/kaocha {:mvn/version "1.0.700"}}
-                      :main-opts  ["-m" "kaocha.runner"]}}}
+                      :main-opts ["-m" "kaocha.runner"]}}}

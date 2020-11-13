@@ -20,4 +20,4 @@
        [:header]
        [:main content]
        [:aside]
-       [:script {:src "/assets/js/main.js"}]])))
+       [:script {:src "/assets/js/main_bundle.js"}]])))

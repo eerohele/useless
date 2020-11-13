@@ -47,7 +47,8 @@
                                                :matchBrackets  true
                                                :mode           mode
                                                :readOnly       read-only?
-                                               :theme          "dracula"}
+                                               :theme          "dracula"
+                                               :scrollbarStyle nil}
                                   editor (CodeMirror. (dom/dom-node this) options)]
                               (when-not read-only?
                                 (let [event-handler #(re-frame/dispatch [:editor/evaluate (code-string %)])]

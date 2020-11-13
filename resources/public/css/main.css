@@ -196,10 +196,13 @@ aside button:hover {
 .CodeMirror {
     font: 0.9rem/1.5 var(--font-family-monospace);
     height: auto;
-    margin-bottom: 1rem;
-
     /* Fix hidden cursor at first column */
     padding-left: 1px;
+}
+
+.CodeMirror-scroll {
+    overflow: hidden !important;
+    position: static;
 }
 
 .cm-s-dracula .CodeMirror-matchingbracket {

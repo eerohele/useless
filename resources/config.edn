@@ -1,4 +1,6 @@
-{:useless.server.http/server   {:handler #ig/ref :useless.server.handler/app
+{:user/figwheel {:id "dev"}
+
+ :useless.server.http/server   {:handler #ig/ref :useless.server.handler/app
                                 :port    1234}
 
  :useless.server.prepl/handler {}

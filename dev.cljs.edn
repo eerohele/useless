@@ -1,0 +1,5 @@
+^{:auto-bundle :webpack}
+{:main useless.client.app
+ :asset-path "/assets/js"
+ :output-dir "resources/public/js"
+ :open-url false}
